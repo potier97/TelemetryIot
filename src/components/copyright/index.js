@@ -1,14 +1,18 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'; 
 import Link from '@material-ui/core/Link';
 
-function Copyright() {
+function Copyright(props) {
     return (
-        <Typography variant="body2" color="textSecondary" align="center" style={{'color': '#18202c'}}>
+        <Typography
+            variant="body2"
+            color="textSecondary"
+            align="center"
+            style={props.white ? { 'color': '#fff', fontFamily: 'Century-Gothic', } : { 'color': '#18202c', fontFamily: 'Century-Gothic', }}> 
             {'Copyright © '}
             <Link color="inherit" href="https://github.com/potier97/TelemetryIot" target="_blank">
                 Telemetry Iot
-        </Link>{' '}
+            </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>

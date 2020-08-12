@@ -130,3 +130,99 @@ export default {
     },
   },
 };
+
+
+
+
+
+
+
+
+
+// theme-context.js
+// export const themes = {
+//   light: {
+//     foreground: '#000000',
+//     background: '#eeeeee',
+//   },
+//   dark: {
+//     foreground: '#ffffff',
+//     background: '#222222',
+//   },
+// };
+
+// export const ThemeContext = React.createContext(
+//   themes.dark // valor por defecto
+// );
+
+
+
+
+// themed-button.js
+// import {ThemeContext} from './theme-context';
+
+// class ThemedButton extends React.Component {
+//   render() {
+//     let props = this.props;
+//     let theme = this.context;
+//     return (
+//       <button
+//         {...props}
+//         style={{backgroundColor: theme.background}}
+//       />
+//     );
+//   }
+// }
+// ThemedButton.contextType = ThemeContext;
+
+// export default ThemedButton;
+
+
+
+// import {ThemeContext, themes} from './theme-context';
+// import ThemedButton from './themed-button';
+
+// // Un componente intermedio que utiliza ThemedButton.
+// function Toolbar(props) {
+//   return (
+//     <ThemedButton onClick={props.changeTheme}>
+//       Change Theme
+//     </ThemedButton>
+//   );
+// }
+
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       theme: themes.light,
+//     };
+
+//     this.toggleTheme = () => {
+//       this.setState(state => ({
+//         theme:
+//           state.theme === themes.dark
+//             ? themes.light
+//             : themes.dark,
+//       }));
+//     };
+//   }
+
+//   render() {
+//     // El botón ThemedButton dentro de ThemeProvider
+//     // usa el tema del estado mientras que el exterior usa
+//     // el tema oscuro predeterminado
+//     return (
+//       <Page>
+//         <ThemeContext.Provider value={this.state.theme}>
+//           <Toolbar changeTheme={this.toggleTheme} />
+//         </ThemeContext.Provider>
+//         <Section>
+//           <ThemedButton />
+//         </Section>
+//       </Page>
+//     );
+//   }
+// }
+
+// ReactDOM.render(<App />, document.root);

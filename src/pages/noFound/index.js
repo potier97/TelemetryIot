@@ -56,7 +56,7 @@ function NoFound(props) {
                         <Button
                             className={classes.bottomHome}
                             size="large"
-                            value="/TelemetryIot"
+                            value="/"
                             onClick={(e) => goto(e)}
                         >Inicio</Button>
                          </Grid> 

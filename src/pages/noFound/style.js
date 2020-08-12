@@ -12,17 +12,13 @@ const useStyles = (theme) => ({
   container: {
     minHeight: '100vh',  
   }, 
-
-  container2:{
-    backgroundColor: 'red',
-  },
+ 
 
 
 
   bottomHome: {
-    color: 'white', 
-    boxShadow: '0px 0px 4px 0.125px #ffffff',
-    background: '#33658A',
+    color: 'white',  
+    background: '#18202c',
     paddingBlockStart: '10px',
     paddingBlockEnd: '10px',
     paddingInlineStart: '40px',
@@ -31,7 +27,7 @@ const useStyles = (theme) => ({
     fontFamily: 'Century-Gothic',
     //marginBottom: theme.spacing(20),
     '&:hover': {
-      backgroundColor: '#33658B',
+      backgroundColor: '#18202c',
     },
   },
 

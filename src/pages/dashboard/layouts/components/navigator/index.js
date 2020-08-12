@@ -42,7 +42,7 @@ const categories = [
       {
         id: 'Salir',
         icon: <ExitToAppIcon />,
-        href: '/login'
+        href: '/'
       }
     ],
   }

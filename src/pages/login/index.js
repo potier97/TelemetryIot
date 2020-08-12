@@ -12,7 +12,7 @@ import GoogleIcon from '../../images/googleBlanco.svg';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import Leaf from '../../images/leaf.svg';
 
-//cCMPONENTE
+//CMPONENTE
 import Copyright from '../../components/copyright'
 
 //ESTILOS

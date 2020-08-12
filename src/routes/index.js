@@ -17,9 +17,8 @@ import { useFirebaseApp } from 'reactfire';
   // render() {
     function Routes(){
     const firebase = useFirebaseApp();
-    console.log(firebase); 
-
-    
+    console.log(firebase);
+    console.log(process.env.REACT_APP_PROJECT_ID);
     return (
       <>
         <Router   >

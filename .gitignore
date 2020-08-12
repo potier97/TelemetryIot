@@ -11,6 +11,13 @@
 # production
 /build
 
+#Keys
+.env
+
+#Files
+comandos.txt
+config.test.js
+
 # misc
 .DS_Store
 .env.local

@@ -2,16 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { FirebaseAppProvider } from 'reactfire';
-import FirebaseConfig from './config';
+import * as serviceWorker from './serviceWorker'; 
 
 ReactDOM.render(
-  <FirebaseAppProvider firebaseConfig={FirebaseConfig}>
     <React.StrictMode>
       <App />
-    </React.StrictMode>
-  </FirebaseAppProvider>,
+    </React.StrictMode>,
   document.getElementById('root')
 );
 

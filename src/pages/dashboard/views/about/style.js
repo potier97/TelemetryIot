@@ -6,7 +6,31 @@ const useStyles = (theme) => ({
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
-    }
+    },
+
+    summary:{
+        fontWeight: 'bold',
+        fontFamily: 'Century-Gothic',
+        color: '#18202c',
+        textAling: 'justify'
+    },
+
+    containerSummary:{
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(2),
+    },
+
+    inscriptionKey:{
+        fontWeight: 'bold',
+        fontFamily: 'Century-Gothic',
+        color: '#18202c',
+        textAlign: 'left'
+    },
+    inscriptionValue:{ 
+        fontFamily: 'Century-Gothic',
+        color: '#18202c',
+    },
+
 
 
 

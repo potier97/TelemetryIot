@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx'; 
+import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
@@ -10,12 +10,20 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Leaf from '../../../../../images/leaf.svg';
 import Grid from '@material-ui/core/Grid';
 import { useHistory } from "react-router-dom";
-import InfoIcon from '@material-ui/icons/Info'; 
+import InfoIcon from '@material-ui/icons/Info';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
- 
+
+
+
+//ESTILOS
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style'
+
+//FIREBASE
+import { Auth } from '../../../../../config'
+
+
 
 const categories = [
   {
@@ -24,17 +32,17 @@ const categories = [
       {
         id: 'Métricas',
         icon: <AssessmentOutlinedIcon />,
-        href: '/TelemetryIot/dashboard/metrics'
+        href: '/dashboard/metrics'
       },
       {
         id: 'Acerca',
         icon: <InfoIcon />,
-        href: '/TelemetryIot/dashboard/acerca',
+        href: '/dashboard/acerca',
       },
       {
         id: 'Salir',
         icon: <ExitToAppIcon />,
-        href: '/TelemetryIot/login'
+        href: '/login'
       }
     ],
   }
@@ -48,23 +56,32 @@ function Navigator(props) {
   const { classes, stateScreen, statusbar, path, ...other } = props;
 
 
-  const handlePage = (value) => {
-    history.push(value)
+  const handlePage = async (value) => {
+
+    if(value !== '/login'){
+        history.push(value)
+    }else{
+        await Auth.signOut();
+        history.push(value)
+    }
   }
+
+
+  
 
 
 
 
   return (
     <Drawer
-      anchor="left" 
+      anchor="left"
       PaperProps={{ className: clsx(!statusbar && classes.appBar, classes.appBarShift) }}
       {...other}>
- 
+
 
       <List disablePadding>
         <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
-         
+
           <Grid item
             container
             direction="row"
@@ -80,7 +97,7 @@ function Navigator(props) {
         {categories.map(({ id, children }) => (
           <React.Fragment key={id}>
             <ListItem className={clsx(stateScreen ? classes.categoryHeader : classes.categoryHeaderPrimaryHidden)}>
-              <ListItemText  className={clsx(stateScreen && classes.categoryHeaderPrimary)} >
+              <ListItemText className={clsx(stateScreen && classes.categoryHeaderPrimary)} >
                 {id}
               </ListItemText>
             </ListItem>

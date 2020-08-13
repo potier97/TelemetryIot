@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
@@ -9,12 +9,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Leaf from '../../../../../images/leaf.svg';
 import Grid from '@material-ui/core/Grid';
-import { useHistory } from "react-router-dom";
 import InfoIcon from '@material-ui/icons/Info';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-
+import { withRouter } from 'react-router-dom';
 
 //ESTILOS
 import { withStyles } from '@material-ui/core/styles';
@@ -25,108 +24,120 @@ import { Auth } from '../../../../../config'
 
 
 
-const categories = [
-  {
-    id: 'Opciones',
-    children: [
-      {
-        id: 'Métricas',
-        icon: <AssessmentOutlinedIcon />,
-        href: '/dashboard/metrics'
-      },
-      {
-        id: 'Acerca',
-        icon: <InfoIcon />,
-        href: '/dashboard/acerca',
-      },
-      {
-        id: 'Salir',
-        icon: <ExitToAppIcon />,
-        href: '/'
-      }
-    ],
+
+class Navigator extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: [
+        {
+          id: 'Opciones',
+          children: [
+            {
+              id: 'Métricas',
+              icon: 1, //<AssessmentOutlinedIcon />,
+              href: '/dashboard/metrics'
+            },
+            {
+              id: 'Acerca',
+              icon: 2, //<InfoIcon />,
+              href: '/dashboard/acerca',
+            },
+            {
+              id: 'Salir',
+              icon: 3, //<ExitToAppIcon />,
+              href: '/'
+            }
+          ],
+        }
+      ]
+    }
+    this.handlePage = this.handlePage.bind(this);
   }
-];
 
 
+  async handlePage(value) {
 
-function Navigator(props) {
+    console.log('change route')
+    if (value !== '/') {
+      this.props.history.push(value)
+    } else {
+      try{
+        let algo = await Auth.signOut();
+        console.log(algo)
+        await this.props.history.push(value)
+      }catch(error){
+        console.log('Error: ', error)
 
-  let history = useHistory();
-  const { classes, stateScreen, statusbar, path, ...other } = props;
-
-
-  const handlePage = async (value) => {
-
-    if(value !== '/login'){
-        history.push(value)
-    }else{
-        await Auth.signOut();
-        history.push(value)
+      }
+     
+     
     }
   }
 
 
-  
+  render() {
+    const { classes, stateScreen, staticContext, statusbar, path, ...rest } = this.props;
 
 
+    return (
+      <Drawer
+        anchor="left"
+        PaperProps={{ className: clsx(!statusbar && classes.appBar, classes.appBarShift) }}
+        {...rest}>
 
 
-  return (
-    <Drawer
-      anchor="left"
-      PaperProps={{ className: clsx(!statusbar && classes.appBar, classes.appBarShift) }}
-      {...other}>
+        <List disablePadding>
+          <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
+
+            <Grid item
+              container
+              direction="row"
+              justify="center"
+              alignItems="center">
+              <Avatar alt="leaf" src={Leaf} className={classes.iconButtonAvatar} />
+            </Grid>
 
 
-      <List disablePadding>
-        <ListItem className={clsx(classes.firebase, classes.item, classes.itemCategory)}>
-
-          <Grid item
-            container
-            direction="row"
-            justify="center"
-            alignItems="center">
-            {/* <img src={Leaf} className={classes.logociduGrande} alt="leaf" /> */}
-            <Avatar alt="leaf" src={Leaf} className={classes.iconButtonAvatar} />
-          </Grid>
-
-
-        </ListItem>
-        {!stateScreen && <div className={classes.dividerHidden} />}
-        {categories.map(({ id, children }) => (
-          <React.Fragment key={id}>
-            <ListItem className={clsx(stateScreen ? classes.categoryHeader : classes.categoryHeaderPrimaryHidden)}>
-              <ListItemText className={clsx(stateScreen && classes.categoryHeaderPrimary)} >
-                {id}
-              </ListItemText>
-            </ListItem>
-            {children.map(({ id: childId, icon, href }) => (
-              <ListItem
-                key={childId}
-                button
-                onClick={(event) => handlePage(href, event)}
-                className={clsx(classes.item, path === href && classes.itemActiveItem)}
-              >
-                <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
-                <ListItemText
-                  classes={{ primary: classes.itemPrimary }}
-                >
-                  {childId}
+          </ListItem>
+          {!stateScreen && <div className={classes.dividerHidden} />}
+          {this.state.categories.map(({ id, children }) => (
+            <React.Fragment key={id}>
+              <ListItem className={clsx(stateScreen ? classes.categoryHeader : classes.categoryHeaderPrimaryHidden)}>
+                <ListItemText className={clsx(stateScreen && classes.categoryHeaderPrimary)} >
+                  {id}
                 </ListItemText>
               </ListItem>
-            ))}
+              {children.map(({ id: childId, icon, href }) => (
+                <ListItem
+                  key={childId}
+                  button
+                  onClick={() => this.handlePage(href)}
+                  className={clsx(classes.item, path === href && classes.itemActiveItem)}
+                >
+                  <ListItemIcon className={classes.itemIcon}>
+                    {icon === 1 ? <AssessmentOutlinedIcon /> : icon === 2 ? <InfoIcon /> : <ExitToAppIcon />}
 
-            {/* <Divider className={clsx(classes.divider, !stateScreen && classes.dividerHidden)} /> */}
-          </React.Fragment>
-        ))}
-      </List>
-    </Drawer>
-  );
+                  </ListItemIcon>
+                  <ListItemText
+                    classes={{ primary: classes.itemPrimary }}
+                  >
+                    {childId}
+                  </ListItemText>
+                </ListItem>
+              ))}
+            </React.Fragment>
+          ))}
+        </List>
+      </Drawer>
+    )
+  }
 }
 
+
 Navigator.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
-export default withStyles(useStyles)(Navigator);
+export default withStyles(useStyles)(withRouter(Navigator));

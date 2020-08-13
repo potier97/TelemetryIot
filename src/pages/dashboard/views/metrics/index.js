@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -9,23 +9,53 @@ import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js'
 
 
-function Metrics(props) {
+import { Line } from "react-chartjs-2";
 
-  const { classes } = props;
+const data = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  datasets: [
+    {
+      label: "First dataset",
+      data: [33, 53, 85, 41, 44, 65],
+      fill: true,
+      backgroundColor: "rgba(75,192,192,0.2)",
+      borderColor: "rgba(75,192,192,1)"
+    },
+    {
+      label: "Second dataset",
+      data: [33, 25, 35, 51, 54, 76],
+      fill: false,
+      borderColor: "#742774"
+    }
+  ]
+}
 
 
 
-  return (
+class Metrics extends Component {
 
-    <Grid className={classes.root}>
-      <CssBaseline />
+  // constructor(props){
+  //   super(props);
+  //   this.state={
 
-      <BigTitle title={'Métricas'} />
+  //   }
+  // }
 
-      <Container maxWidth={false} className={classes.container}>
-        <Grid container spacing={3}>
 
-          {/* Fila Uno
+
+  render() {
+    const { classes } = this.props;
+    return (
+
+      <Grid className={classes.root}>
+        <CssBaseline />
+
+        <BigTitle title={'Métricas'} />
+
+        <Container maxWidth={false} className={classes.container}>
+          <Grid container spacing={3}>
+
+            {/* Fila Uno
           Fila Uno
           Fila Uno
           Fila Uno
@@ -33,43 +63,43 @@ function Metrics(props) {
           Fila Uno
           Fila Uno */}
 
-          <Grid item xs={12} md={6} lg={3}>
-            <Card
-              disableWidgetMenu
-              title={'Métrica 1'}
-            >
+            <Grid item xs={12} md={6} lg={3}>
+              <Card
+                disableWidgetMenu
+                title={'Métrica 1'}
+              >
 
-            </Card>
-          </Grid>
+              </Card>
+            </Grid>
 
-          <Grid item xs={12} md={6} lg={3}>
-            <Card
-              disableWidgetMenu
-              title={'Métrica 2'}
-            >
+            <Grid item xs={12} md={6} lg={3}>
+              <Card
+                disableWidgetMenu
+                title={'Métrica 2'}
+              >
 
-            </Card>
-          </Grid>
+              </Card>
+            </Grid>
 
-          <Grid item xs={12} md={6} lg={3}>
-            <Card
-              disableWidgetMenu
-              title={'Métrica 3'}
-            >
+            <Grid item xs={12} md={6} lg={3}>
+              <Card
+                disableWidgetMenu
+                title={'Métrica 3'}
+              >
 
-            </Card>
-          </Grid>
+              </Card>
+            </Grid>
 
-          <Grid item xs={12} md={6} lg={3}>
-            <Card
-              disableWidgetMenu
-              title={'Métrica 4'}
-            >
+            <Grid item xs={12} md={6} lg={3}>
+              <Card
+                disableWidgetMenu
+                title={'Métrica 4'}
+              >
 
-            </Card>
-          </Grid>
+              </Card>
+            </Grid>
 
-          {/* Fila Dos
+            {/* Fila Dos
           Fila Dos
           Fila Dos
           Fila Dos
@@ -78,26 +108,26 @@ function Metrics(props) {
           Fila Dos */}
 
 
-          <Grid item xs={12} md={8} lg={9}>
-            <Card
-              disableWidgetMenu
-              title={'Métrica 5'}
-            >
+            <Grid item xs={12} md={8} lg={9}>
+              <Card
+                disableWidgetMenu
+                title={'Métrica 5'}
+              >
+                  <Line data={data} />
+              </Card>
+            </Grid>
 
-            </Card>
-          </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Card
+                disableWidgetMenu
+                title={'Métrica 6'}
+              >
 
-          <Grid item xs={12} md={4} lg={3}>
-            <Card
-              disableWidgetMenu
-              title={'Métrica 6'}
-            >
-
-            </Card>
-          </Grid>
+              </Card>
+            </Grid>
 
 
-          {/* Fila Tres
+            {/* Fila Tres
           Fila Tres
           Fila Tres
           Fila Tres
@@ -106,19 +136,20 @@ function Metrics(props) {
           Fila Tres */}
 
 
-          <Grid item xs={12}>
-            <Card
-              disableWidgetMenu
-              title={'Métrica 7'}
-            >
+            <Grid item xs={12}>
+              <Card
+                disableWidgetMenu
+                title={'Métrica 7'}
+              >
 
-            </Card>
+              </Card>
+            </Grid>
+
           </Grid>
-
-        </Grid>
-      </Container>
-    </Grid>
-  );
+        </Container>
+      </Grid>
+    )
+  };
 }
 
 Metrics.propTypes = {

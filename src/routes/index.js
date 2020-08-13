@@ -1,37 +1,39 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, 
+  BrowserRouter as Router,
   Switch,
   Route,
-  // eslint-disable-next-line
-  Redirect
-} from 'react-router-dom'; 
-// eslint-disable-next-line
-import NoFound from "../pages/noFound"; 
+  //Redirect
+} from 'react-router-dom';
+import NoFound from "../pages/noFound";
 import Homepage from "../pages/homepage";
-// eslint-disable-next-line
-import Maintenance from '../pages/maintenance';
+//import Maintenance from '../pages/maintenance';
 import Login from '../pages/login';
 import Dashboard from '../pages/dashboard';
+import GuardRoute from '../components/guardRoute';
+import Root from '../components/root';
+import { AuthContexProvider } from '../context/auth';
 
 
 
-   
-    function Routes(){
-    return (
-      <>
-        <Router   >
-          <Switch>
-            {/* <Redirect exact from="/TelemetryIot"  to="/TelemetryIot/login" /> */}
-            {/* <Route exact path='/TelemetryIot/dashboard' component={Dashboard} /> */}
-            {/* <Route exact path='/Maintenance' component={Maintenance} /> */}
-            <Route path="/dashboard" render={(props) => <Dashboard {...props} />} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/' component={Homepage} />
-            <Route component={NoFound} />
-            {/* <Redirect to="/login" /> */}
-          </Switch>
-        </Router>
-      </>
-    )
+
+function Routes() {
+  return (
+    <>
+      <AuthContexProvider>
+        <Root>
+          <Router   >
+            <Switch>
+              {/* <Route type='private' path="/dashboard" render={(props) => <Dashboard {...props} />} /> */}
+              <GuardRoute type='private' path="/dashboard" render={(props) => <Dashboard {...props} />} />
+              {/* <GuardRoute type='private' path="/dashboard" component={Dashboard} /> */}
+              <GuardRoute type='public' exact path='/login' component={Login} />
+              <GuardRoute type='public' exact path='/' component={Homepage} />
+              <Route type='public' component={NoFound} />
+            </Switch>
+          </Router>
+        </Root>
+      </AuthContexProvider>
+    </>
+  )
 }; export default Routes; 

@@ -1,5 +1,3 @@
-//import { makeStyles } from "@material-ui/styles";
-
 const useStyles = (theme) => ({
   widgetWrapper: {
     display: "flex",
@@ -12,8 +10,8 @@ const useStyles = (theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  widgetRoot: {
-    //boxShadow: theme.customShadows.widget,
+  widgetRoot: { 
+    
   },
   widgetBody: {
     paddingBottom: theme.spacing(3),
@@ -28,6 +26,11 @@ const useStyles = (theme) => ({
     flexDirection: "column",
     flexGrow: 1,
     overflow: "hidden",
+  },
+  title: {
+    fontWeight: 'bold',
+    fontFamily: 'Century-Gothic',
+    color: '#18202c',
   },
   moreButton: {
     margin: -theme.spacing(1),

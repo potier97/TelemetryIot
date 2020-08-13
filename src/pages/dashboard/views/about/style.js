@@ -1,7 +1,8 @@
 const useStyles = (theme) => ({
     root: {
-        height: '100%',
-        background: '#e4e4e4',
+        //height: '100%',
+        background: '#e4e4e4', 
+        //width: '50%',
     },
     container: {
         paddingTop: theme.spacing(4),

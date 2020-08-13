@@ -28,9 +28,7 @@ const useStyles = (theme) => ({
     marginLeft: -theme.spacing(1),
   },
   iconButtonAvatar: {
-    margin: theme.spacing(1),
-    //width: theme.spacing(12),
-    //height: theme.spacing(12),
+    margin: theme.spacing(1), 
   },
   link: {
     textDecoration: 'none',
@@ -43,9 +41,10 @@ const useStyles = (theme) => ({
     borderColor: lightColor,
   },
   tittleSlide: {
+    fontFamily: 'Century-Gothic',
     marginLeft: theme.spacing(3),
     [theme.breakpoints.down('xs')]: {
-      marginLeft: theme.spacing(0),
+      marginLeft: theme.spacing(1),
     },
   },
   nameUser: {

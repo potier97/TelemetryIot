@@ -35,11 +35,10 @@ class Login extends Component {
 
 
   async handleSinginGoogle() {
-
     try { 
+      // eslint-disable-next-line 
       let statusLogin = await Auth.signInWithPopup(GoogleProvider)
-      console.log(statusLogin);
-
+      //console.log(statusLogin);
       this.props.history.push({
         pathname: '/dashboard/metrics',
         //state: { detail: statusLogin }
@@ -47,25 +46,21 @@ class Login extends Component {
 
     } catch (error) {
       console.log('Error: ', error);
-
     }
   }
  
 
   async handleSinginGitHub() {
-
     try { 
+      // eslint-disable-next-line 
       let statusLogin = await Auth.signInWithPopup(GithubProvider)
-      console.log(statusLogin);
-
+      //console.log(statusLogin);
       this.props.history.push({
         pathname: '/dashboard/metrics',
         //state: { detail: statusLogin }
       });
-
     } catch (error) {
       console.log('Error: ', error);
-
     }
   }
 

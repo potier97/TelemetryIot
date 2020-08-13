@@ -9,6 +9,7 @@ import Metrics  from '../views/metrics';
 import About  from '../views/about'; 
  
 function Routes(){
+  //console.log('rende')
   return (
     <Switch>
       <RouteWithLayout

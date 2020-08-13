@@ -1,52 +1,70 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types'; 
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Header from './components/header';
-import clsx from 'clsx'; 
+import clsx from 'clsx';
 import Navigator from './components/navigator'
-import { useMediaQuery } from '@material-ui/core';
-import { withStyles, useTheme  } from '@material-ui/core/styles';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js'
 
-function Main(props) {
+ 
 
-  const { children, classes, auth } = props;
 
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true
-  });
-  
-  const [mobileOpen, setOpenSidebar] = useState(false);
+class Main extends Component {
 
-  const handleDrawerToggle = () => {
-    setOpenSidebar(!mobileOpen);
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMobile: false,
+    }
+    this.handleMobile = this.handleMobile.bind(this);
   };
 
-  return (
-    <>
-      <div 
-        className={clsx({[classes.root]: true})}> 
-          <Header onDrawerToggle={handleDrawerToggle} statusbar={mobileOpen} stateScreen={isDesktop}/>
+  handleMobile(){
+    this.setState({
+      isMobile: !this.state.isMobile,
+    })
+  };
+
+  // componentDidMount(){
+  //   let isWidth = isWidthUp('md', this.props.width)
+  //   this.setState({
+  //     isDesktop: isWidth
+  //   })
+  // }
+
+  render() {
+    const { children, classes, auth, width } = this.props; 
+    const isDesktop = isWidthUp('md', width);
+    //console.log(isDesktop)
+
+    return (
+      <>
+        <div
+          className={clsx({ [classes.root]: true })}>
+          <Header onDrawerToggle={this.handleMobile} statusbar={this.state.isMobile} stateScreen={isDesktop} />
           <Navigator
             path={auth.path}
-            open={mobileOpen}
+            open={this.state.isMobile}
             variant={isDesktop ? 'permanent' : 'temporary'}
-            statusbar={mobileOpen}
-            onClose={handleDrawerToggle}
-            stateScreen={mobileOpen}
+            statusbar={this.state.isMobile}
+            onClose={this.handleMobile}
+            stateScreen={this.state.isMobile}
           />
-          <main 
-            className={clsx(classes.main, mobileOpen && classes.mainShift)}>
-              {children}
+          <main
+            className={clsx(classes.main, this.state.isMobile && classes.mainShift)}>
+            {children}
           </main>
-      </div>
-    </>
-  );
+        </div>
+      </>
+    )
+  };
 }
 
 Main.propTypes = {
   children: PropTypes.node,
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(useStyles)(Main); 
+export default withStyles(useStyles)(withWidth()(Main));
+
+ 

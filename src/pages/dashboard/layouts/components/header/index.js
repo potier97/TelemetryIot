@@ -1,96 +1,107 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+
+
 import AppBar from '@material-ui/core/AppBar';
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
-//import Hidden from '@material-ui/core/Hidden';
+//import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid'; 
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
+
 import IconButton from '@material-ui/core/IconButton';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Leaf from '../../../../../images/leaf.svg';
+//import Leaf from '../../../../../images/leaf.svg';
+
+
+//ESTILOS
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js';
 
-function Header(props) {
+//CONTEXT
+import { AuthContext } from '../../../../../context/auth'
 
-  const { classes, onDrawerToggle, statusbar, stateScreen } = props;
+class Header extends Component {
 
-  const [statusMenu, setMenu] = React.useState(false);
-
-  const handleChange = () => {
-    setMenu(!statusMenu);
+  constructor(props) {
+    super(props);
+    this.state = {
+      statusMenu: false
+    };
+    this.handleMenu = this.handleMenu.bind(this);
+  };
+ 
+  handleMenu() {
+    this.setState({
+      statusMenu: !this.state.statusMenu
+    })
   };
 
-  return (
 
-    <>
-      <AppBar
-        color="primary"
-        position="sticky"
-        className={clsx({
-          [classes.appbarcololor]: true,
-          [classes.appBarShift]: statusbar && stateScreen,
-        })}
-        elevation={0}>
-        <Toolbar>
-
-          <Grid item
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center">
+  render() {
+    const { classes, onDrawerToggle, statusbar, stateScreen } = this.props;
+    //console.log('algo')
+    return (
+      <>
+        <AppBar
+          color="primary"
+          position="sticky"
+          className={clsx({
+            [classes.appbarcololor]: true,
+            [classes.appBarShift]: statusbar && stateScreen,
+          })}
+          elevation={0}>
+          <Toolbar>
 
             <Grid item
               container
               direction="row"
-              justify="flex-start"
-              alignItems="center" xs={7}>
+              justify="space-between"
+              alignItems="center">
 
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={() => { onDrawerToggle(); handleChange() }}
-                className={classes.menuButton}>
-                {statusMenu ? <MenuOpenIcon /> : <MenuIcon />}
-              </IconButton>
+              <Grid item
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center" xs={12}>
 
-              <Typography color="inherit" noWrap variant="h5" component="h1" className={classes.tittleSlide}>
-                Dashboard
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={() => { onDrawerToggle(); this.handleMenu() }}
+                  className={classes.menuButton}>
+                  {this.state.statusMenu ? <MenuOpenIcon /> : <MenuIcon />}
+                </IconButton>
+
+                <Typography  noWrap variant="h6" component="h1" className={classes.tittleSlide}>
+                  {this.context.user && this.context.user.displayName}
               </Typography>
-            </Grid>
-
-            <Grid item
-              container
-              direction="row"
-              justify="flex-end"
-              alignItems="center" xs={5}>
-              {/* <Hidden xsDown>
-                <Grid item
-                  direction="row"
-                  justify="center"
-                  alignItems="center">
-                  <Typography color="inherit" noWrap variant="h6" component="h1" className={classes.nameUser}>
-                    Nombre Usuario
-                </Typography>
-                </Grid>
-              </Hidden> */}
-              <Grid item>
-                <Avatar alt="leaf" src={Leaf} className={classes.iconButtonAvatar} />
               </Grid>
+
+              {/* <Grid item
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="center" xs={5}> 
+                 <Grid item>
+                  <Avatar alt="leaf" src={Leaf} className={classes.iconButtonAvatar} />
+                </Grid> 
+              </Grid> */}
             </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar >
-    </>
-  );
-}
+          </Toolbar>
+        </AppBar >
+      </>
+    );
+  };
+};
+
+
+Header.contextType = AuthContext;
 
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
   onDrawerToggle: PropTypes.func.isRequired,
 };
 

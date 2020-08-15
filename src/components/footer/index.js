@@ -66,7 +66,7 @@ class Footer extends Component {
                                         justify="flex-start"
                                         alignItems="center">
                                         <LinkedInIcon className={classes.iconColor} />
-                                        <Typography variant="body1" gutterBottom className={classes.title}>
+                                        <Typography variant="body2" gutterBottom className={classes.title}>
                                             @usuario
                                         </Typography>
                                     </Grid>
@@ -75,7 +75,7 @@ class Footer extends Component {
                                         justify="flex-start"
                                         alignItems="center">
                                         <MailOutlineIcon className={classes.iconColor} />
-                                        <Typography variant="body1" gutterBottom className={classes.title}>
+                                        <Typography variant="body2" gutterBottom className={classes.title}>
                                             correo@ejemplo.com
                                             </Typography>
                                     </Grid>
@@ -94,7 +94,7 @@ class Footer extends Component {
                                         justify="flex-start"
                                         alignItems="center">
                                         <LinkedInIcon className={classes.iconColor} />
-                                        <Typography variant="body1" gutterBottom className={classes.title}>
+                                        <Typography variant="body2" gutterBottom className={classes.title}>
                                             @usuario
                                             </Typography>
                                     </Grid>
@@ -103,9 +103,9 @@ class Footer extends Component {
                                         justify="flex-start"
                                         alignItems="center">
                                         <MailOutlineIcon className={classes.iconColor} />
-                                        <Typography variant="body1" gutterBottom className={classes.title}>
+                                        <Typography variant="body2" gutterBottom className={classes.title}>
                                             correo@ejemplo.com
-                                            </Typography>
+                                        </Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>

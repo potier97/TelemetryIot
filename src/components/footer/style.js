@@ -28,13 +28,13 @@ const useStyles = (theme) => ({
     },
 
     title: {
-        fontWeight: 'bold',
+        //fontWeight: 'bold',
         fontFamily: 'Century-Gothic',
         color: '#ffff',
     },
     iconColor: {
         color: '#fff',
-        fontSize: 40,
+        fontSize: 25,
         margin: theme.spacing(1),
     },
 

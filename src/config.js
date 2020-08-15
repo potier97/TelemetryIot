@@ -1,4 +1,6 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth'
 
 const config = {
     apiKey: process.env.REACT_APP_APIKEY_FIREBASE,
@@ -11,17 +13,12 @@ const config = {
     measurementId: process.env.REACT_APP_MEASUREMENTID_FIREBASE,
 };
 
-firebase.initializeApp(config);
-
+const Firebase = firebase.initializeApp(config);
+const Db = Firebase.firestore();
 const Auth = firebase.auth();
-//const db = firebase.firestore();
-
 const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 const GithubProvider = new firebase.auth.GithubAuthProvider();
+ 
 
-// db.settings({
-//     timestampsInSnapshots: true,
-// })
-
-export { Auth, GoogleProvider,  GithubProvider }
-export default firebase;
+export { Auth, Db, GoogleProvider, GithubProvider }
+export default Firebase;

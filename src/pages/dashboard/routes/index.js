@@ -7,9 +7,10 @@ import RouteWithLayout from '../components/routeWithLayout';
 import Main  from '../layouts';  
 import Metrics  from '../views/metrics';
 import About  from '../views/about'; 
+import Plants  from '../views/plants'; 
+
  
-function Routes(){
-  //console.log('rende')
+function Routes(){ 
   return (
     <Switch>
       <RouteWithLayout
@@ -22,7 +23,13 @@ function Routes(){
         component={About}
         exact
         layout={Main}
-        path="/dashboard/acerca"
+        path="/dashboard/about"
+      />
+      <RouteWithLayout
+        component={Plants}
+        exact
+        layout={Main}
+        path="/dashboard/plants"
       />
       <Redirect to={{ pathname: "/dashboard/metrics" }} />
     </Switch>

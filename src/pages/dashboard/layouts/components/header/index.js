@@ -73,7 +73,7 @@ class Header extends Component {
                   aria-label="open drawer"
                   onClick={() => { onDrawerToggle(); this.handleMenu() }}
                   className={classes.menuButton}>
-                  {this.state.statusMenu ? <MenuOpenIcon /> : <MenuIcon />}
+                  {stateScreen ?  <MenuIcon /> : <MenuOpenIcon />  }
                 </IconButton>
 
                 <Typography  noWrap variant="h6" component="h1" className={classes.tittleSlide}>

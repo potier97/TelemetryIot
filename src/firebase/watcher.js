@@ -1,5 +1,6 @@
-import { Auth } from '../config'
- 
+import { Auth, Db } from '../config'
+
+
 export function watchUserChnages(callback) {
     const unsub = Auth.onAuthStateChanged((user) => {
         if (user && !user.isAnonymous) {
@@ -14,5 +15,43 @@ export function watchUserChnages(callback) {
             callback(null);
         }
     });
+    return unsub;
+};
+
+
+
+export function watchPlants(callback) {
+    const unsub = Db.collection(process.env.REACT_APP_DATABASE_ID_PLANTS).onSnapshot((snapshot) => {
+        const docs = []
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            docs.push({
+                ...data,
+                id: doc.id
+            });
+        });
+
+        callback(docs);
+
+    })
+    return unsub;
+}; 
+
+export function watchWeather(callback) {
+    const unsub = Db.collection(process.env.REACT_APP_DATABASE_ID_WEATHER).onSnapshot((snapshot) => {
+        const docs = []
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            docs.push({
+                ...data,
+                id: doc.id
+            });
+        });
+
+        callback(docs);
+
+    })
     return unsub;
 }; 

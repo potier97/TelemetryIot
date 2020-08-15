@@ -11,6 +11,7 @@ import Leaf from '../../../../../images/leaf.svg';
 import Grid from '@material-ui/core/Grid';
 import InfoIcon from '@material-ui/icons/Info';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
+import StorageIcon from '@material-ui/icons/Storage';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { withRouter } from 'react-router-dom';
@@ -42,11 +43,16 @@ class Navigator extends Component {
             {
               id: 'Acerca',
               icon: 2, //<InfoIcon />,
-              href: '/dashboard/acerca',
+              href: '/dashboard/about',
+            },
+            {
+              id: 'Plantas',
+              icon: 3, //<StorageIcon />,
+              href: '/dashboard/plants'
             },
             {
               id: 'Salir',
-              icon: 3, //<ExitToAppIcon />,
+              icon: 4, //<ExitToAppIcon />,
               href: '/'
             }
           ],
@@ -58,21 +64,17 @@ class Navigator extends Component {
 
 
   async handlePage(value) {
-
-    console.log('change route')
+    //console.log('change route')
     if (value !== '/') {
       this.props.history.push(value)
     } else {
-      try{
+      try {
         let algo = await Auth.signOut();
         console.log(algo)
         await this.props.history.push(value)
-      }catch(error){
+      } catch (error) {
         console.log('Error: ', error)
-
       }
-     
-     
     }
   }
 
@@ -117,7 +119,7 @@ class Navigator extends Component {
                   className={clsx(classes.item, path === href && classes.itemActiveItem)}
                 >
                   <ListItemIcon className={classes.itemIcon}>
-                    {icon === 1 ? <AssessmentOutlinedIcon /> : icon === 2 ? <InfoIcon /> : <ExitToAppIcon />}
+                    {icon === 1 ? <AssessmentOutlinedIcon /> : icon === 2 ? <InfoIcon /> : icon === 3 ? <StorageIcon /> : <ExitToAppIcon />}
 
                   </ListItemIcon>
                   <ListItemText

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-    watchUserChnages,
-} from '../firebase';
+import { watchUserChnages } from '../firebase';
 
 export const AuthContext = React.createContext();
 

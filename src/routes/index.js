@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  //Redirect
 } from 'react-router-dom';
 import NoFound from "../pages/noFound";
 import Homepage from "../pages/homepage";
@@ -13,27 +12,34 @@ import Dashboard from '../pages/dashboard';
 import GuardRoute from '../components/guardRoute';
 import Root from '../components/root';
 import { AuthContexProvider } from '../context/auth';
-
+import { PlantContexProvider } from '../context/plant';
+import { WeatherContexProvider } from '../context/weather';
+import { SnackbarProvider } from 'notistack';
 
 
 
 function Routes() {
   return (
     <>
-      <AuthContexProvider>
-        <Root>
-          <Router   >
-            <Switch>
-              {/* <Route type='private' path="/dashboard" render={(props) => <Dashboard {...props} />} /> */}
-              <GuardRoute type='private' path="/dashboard" render={(props) => <Dashboard {...props} />} />
-              {/* <GuardRoute type='private' path="/dashboard" component={Dashboard} /> */}
-              <GuardRoute type='public' exact path='/login' component={Login} />
-              <GuardRoute type='public' exact path='/' component={Homepage} />
-              <Route type='public' component={NoFound} />
-            </Switch>
-          </Router>
-        </Root>
-      </AuthContexProvider>
+      <SnackbarProvider maxSnack={3}>
+        <AuthContexProvider>
+          <WeatherContexProvider>
+            <PlantContexProvider>
+              <Root>
+                <Router   >
+                  <Switch>
+                    {/* <Route type='private' path="/dashboard" render={(props) => <Dashboard {...props} />} />  */}
+                    <GuardRoute type='private' path="/dashboard" render={(props) => <Dashboard {...props} />} />
+                    <GuardRoute type='public' exact path='/login' component={Login} />
+                    <GuardRoute type='public' exact path='/' component={Homepage} />
+                    <Route type='public' component={NoFound} />
+                  </Switch>
+                </Router>
+              </Root>
+            </PlantContexProvider>
+          </WeatherContexProvider>
+        </AuthContexProvider>
+      </SnackbarProvider>
     </>
   )
 }; export default Routes; 

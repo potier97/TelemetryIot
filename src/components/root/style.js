@@ -9,27 +9,33 @@ const useStyles = (theme) => ({
     dialogPaper: {
         backgroundColor: '#e4e4e4',
         height: '50%',
+        [theme.breakpoints.down('sm')]: {
+            height: '70%',
+        },
     },
 
     root: {
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
         //backgroundColor: 'red',
-        direction:"column",
-        justify:"center",
-        alignItems:"center",
+        direction: "column",
+        justify: "center",
+        alignItems: "center",
     },
     container: {
         display: 'flex',
         //backgroundColor: 'red',
-        height: '100%',  
+        height: '100%',
     },
 
-    dots:{
-        color: '#18202c', 
+    dots: {
+        color: '#18202c',
     },
-    containerDots:{
-        margin: theme.spacing(4), 
+    containerDots: {
+        margin: theme.spacing(4),
+        [theme.breakpoints.down('sm')]: {
+            margin: theme.spacing(1),
+        },
     },
 
     title: {

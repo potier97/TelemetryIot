@@ -12,9 +12,9 @@ function BigTitle(props) {
     return (
         <>
             <Container maxWidth={false} className={classes.container}>
-                <Grid container spacing={3}>
+                <Grid container spacing={2}>
                     <Grid className={classes.containerTittle}>
-                        <Typography component="h1" variant="h2" align="left" className={classes.tittle}>
+                        <Typography component="h1" variant="h4" align="left"   noWrap   className={classes.tittle}>
                             {props.title}
                         </Typography>
                     </Grid>

@@ -20,8 +20,8 @@ export class WeatherContexProvider extends Component {
                 this.setState({
                     isSetup: true
                 })
-                watchWeather((Weather) => {
-                    this.setState({ Weather })
+                watchWeather((weather) => {
+                    this.setState({ weather })
                 })
             }
 

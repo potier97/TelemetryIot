@@ -13,7 +13,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import AssessmentOutlinedIcon from '@material-ui/icons/AssessmentOutlined';
 import StorageIcon from '@material-ui/icons/Storage';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
+import EcoIcon from '@material-ui/icons/Eco';
 import { withRouter } from 'react-router-dom';
 
 //ESTILOS
@@ -51,8 +51,13 @@ class Navigator extends Component {
               href: '/dashboard/plants'
             },
             {
+              id: 'Recomendación',
+              icon: 4, //<EcoIcon />,
+              href: '/dashboard/recomendation'
+            }, 
+            {
               id: 'Salir',
-              icon: 4, //<ExitToAppIcon />,
+              icon: 5, //<ExitToAppIcon />,
               href: '/'
             }
           ],
@@ -119,7 +124,7 @@ class Navigator extends Component {
                   className={clsx(classes.item, path === href && classes.itemActiveItem)}
                 >
                   <ListItemIcon className={classes.itemIcon}>
-                    {icon === 1 ? <AssessmentOutlinedIcon /> : icon === 2 ? <InfoIcon /> : icon === 3 ? <StorageIcon /> : <ExitToAppIcon />}
+                    {icon === 1 ? <AssessmentOutlinedIcon /> : icon === 2 ? <InfoIcon /> : icon === 3 ? <StorageIcon /> : icon === 4  ? <EcoIcon />  : <ExitToAppIcon />}
 
                   </ListItemIcon>
                   <ListItemText

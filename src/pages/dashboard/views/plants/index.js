@@ -62,6 +62,9 @@ class Plants extends Component {
       //Validacion de Actualización
       isUpdating: false,
 
+      //Old Name Update
+      oldPlantName: '',
+
       //ID del item a Actualizar
       idPlant: '',
 
@@ -195,7 +198,19 @@ class Plants extends Component {
     let onlyNumbers = /^-?\d*\.{0,1}\d+$/;  //Números positivos y negativos
     ///^[0-9]*$/;
     let noNumbers = /^([^0-9]*)$/;
-    let uniqueName = await this.context.plants.some(item => item.namePlants.toLowerCase() === this.state.plantName.toLowerCase());
+
+    let uniqueName;
+    if(this.state.isUpdating){
+      uniqueName = await this.context.plants.some(item => {
+          if(item.namePlants.toLowerCase() === this.state.plantName.toLowerCase() && this.state.oldPlantName.toLowerCase() !== this.state.plantName.toLowerCase() ){
+            return true
+          }
+          return false
+        });
+    }else{
+      uniqueName = await this.context.plants.some(item => item.namePlants.toLowerCase() === this.state.plantName.toLowerCase());
+    }
+    
 
     //Nombre de la planta
     if (noNumbers.test(this.state.plantName) && this.state.plantName.length > 0 && !uniqueName) {
@@ -456,6 +471,7 @@ class Plants extends Component {
   updatePlants(updateData) {
     let data = updateData;
     this.setState({
+      oldPlantName: data.namePlants,
       plantName: data.namePlants,
       tempMax: data.tempMax,
       tempMin: data.tempMin,
@@ -470,6 +486,7 @@ class Plants extends Component {
 
   cancelPlants() {
     this.setState({
+      oldPlantName: '',
       //Nombre de la planta
       plantName: '',
       plantNameError: false,

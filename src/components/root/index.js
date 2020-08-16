@@ -4,6 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 
 //SPINNER
@@ -22,7 +23,8 @@ import { AuthContext } from '../../context/auth'
 
 class Root extends Component {
     render() {
-        const { children, classes, } = this.props;
+        const { children, classes, width } = this.props;
+        const isDesktop = isWidthUp('md', width);
         const { authReady } = this.context;
 
         if (!authReady) { 
@@ -48,14 +50,14 @@ class Root extends Component {
                                 justify="center"
                                 alignItems="center"
                                 className={classes.container}>
-                                <Typography component="h1" variant="h3" className={classes.title}>
+                                <Typography component="h1" variant={isDesktop ? "h3":"h5"} className={classes.title}>
                                     Cargando...
                                 </Typography>
                                 <Grid item   className={classes.containerDots}   >
                                 <CircularProgress
                                     className={classes.dots}
-                                    size={80}
-                                    thickness={4}
+                                    size={isDesktop ? 80 : 50}
+                                    thickness={isDesktop ? 4 : 3}
                                 />
                                 </Grid>
                             </Grid>
@@ -79,4 +81,4 @@ Root.propTypes = {
 
 
 
-export default withStyles(useStyles)(Root);
+export default withStyles(useStyles)(withWidth()(Root));

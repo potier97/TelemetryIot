@@ -9,43 +9,49 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 //CONTEXTO
 import { WeatherContext } from '../../../../context/weather'
 
+//GRÁFICO
+import SimpleDoughnut from '../../../../components/simpleDoughnut';
+//import '../node_modules/react-vis/dist/style.css';
+import { XYPlot, VerticalBarSeries } from 'react-vis';
 
+
+//IMAGENES
+// import Temperature from '../../../../images/temperature.svg';
+// import Gout from '../../../../images/gout.svg';
+// import Sun from '../../../../images/sun.svg';
 
 //ESTILOS
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js'
 
 
-import { Line } from "react-chartjs-2";
-
-const data = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  datasets: [
-    {
-      label: "First dataset",
-      data: [33, 53, 85, 41, 44, 65],
-      fill: true,
-      backgroundColor: "rgba(75,192,192,0.2)",
-      borderColor: "rgba(75,192,192,1)"
-    },
-    {
-      label: "Second dataset",
-      data: [33, 25, 35, 51, 54, 76],
-      fill: false,
-      borderColor: "#742774"
-    }
-  ]
-}
-
-
-
 class Recomendation extends Component {
 
-  // constructor(props){
-  //   super(props);
-  //   this.state={
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+
+      dato: 0,
+      data: [
+        { x: 0, y: 8 },
+        { x: 1, y: 5 },
+        { x: 2, y: 4 },
+        { x: 3, y: 9 },
+        { x: 4, y: 1 },
+        { x: 5, y: 7 },
+        { x: 6, y: 6 },
+        { x: 7, y: 3 },
+        { x: 8, y: 2 },
+        { x: 9, y: 0 }
+      ],
+    }
+    this.handleChange = this.handleChange.bind(this);
+  };
+
+  handleChange(e) {
+    // eslint-disable-next-line
+    let data = e;
+  }
 
 
 
@@ -54,44 +60,86 @@ class Recomendation extends Component {
     //const { weather  } = this.context;
     //console.log(weather)
     return (
-
       <Grid className={classes.root}>
         <CssBaseline />
-
         <BigTitle title={'Recomendación'} />
-
         <Container maxWidth={false} className={classes.container}>
           <Grid container spacing={3}>
 
-           
-            {/* Fila Dos
-          Fila Dos
-          Fila Dos
-          Fila Dos
-          Fila Dos
-          Fila Dos
-          Fila Dos */}
 
 
-            <Grid item xs={12} md={8} lg={9}>
+            <Grid item xs={12} md={4}>
               <Card
                 disableWidgetMenu
-                title={'Métrica 1'}
+                title={'Temperatura'}
               >
-                <Line data={data} />
+                <SimpleDoughnut
+                  labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+                  firstLabel={'First dataset'}
+                  xLabel={'Nombre  x'}
+                  dataOne={[53, 15, 25, 65, 45]}
+                />
               </Card>
             </Grid>
 
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={4}>
               <Card
                 disableWidgetMenu
-                title={'Métrica 2'}
+                title={'Humedad'}
+              >
+                <SimpleDoughnut
+                  labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+                  firstLabel={'First dataset'}
+                  xLabel={'Nombre  x'}
+                  dataOne={[14, 25, 36, 28, 65]}
+                />
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} md={4}>
+              <Card
+                disableWidgetMenu
+                title={'Luz'}
+              >
+                <SimpleDoughnut
+                  labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+                  firstLabel={'First dataset'}
+                  xLabel={'Nombre  x'}
+                  dataOne={[45, 25, 95, 25, 75]}
+                />
+              </Card>
+            </Grid>
+
+            {/*  SEGUNDA FILA
+            SEGUNDA FILA
+            SEGUNDA FILA
+            SEGUNDA FILA
+            SEGUNDA FILA
+            SEGUNDA FILA */}
+
+
+            <Grid item xs={12} md={4}>
+              <Card
+                disableWidgetMenu
+                title={'Recomendación'}
               >
 
               </Card>
             </Grid>
 
- 
+            <Grid item xs={12} md={8}>
+              <Card
+                disableWidgetMenu
+                title={'Mapa de Calor'}
+              >
+                <XYPlot height={400} width={600}>
+                  <VerticalBarSeries data={this.state.data} />
+                </XYPlot>
+              </Card>
+            </Grid>
+
+
+
           </Grid>
         </Container>
       </Grid>

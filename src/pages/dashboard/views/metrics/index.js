@@ -11,45 +11,21 @@ import TabPanel from '../../../../components/tabPanel';
 import BigTitle from '../../../../components/bigTittle';
 import Card from '../../../../components/card';
 
-
 //IMAGENES
 import Temperature from '../../../../images/temperature.svg';
 import Gout from '../../../../images/gout.svg';
 import Sun from '../../../../images/sun.svg';
 
-
 //CONTEXTO
 import { WeatherContext } from '../../../../context/weather';
-
-//SPEEDOMETER
-//import ReactSpeedometer from "react-d3-speedometer"
-//import SemiCircleProgressBar from "react-progressbar-semicircle";
 
 //ESTILOS
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js'
 
-
-import { Line } from "react-chartjs-2";
-
-const data = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  datasets: [
-    {
-      label: "First dataset",
-      data: [33, 53, 85, 41, 44, 65],
-      fill: true,
-      backgroundColor: "rgba(75,192,192,0.2)",
-      borderColor: "rgba(75,192,192,1)"
-    },
-    {
-      label: "Second dataset",
-      data: [33, 25, 35, 51, 54, 76],
-      fill: false,
-      borderColor: "#742774"
-    }
-  ]
-}
+//GRÁFICO   
+import MuiltiLines from '../../../../components/muiltiLines'; 
+import SimpleLines from '../../../../components/simpleLines';
 
 
 
@@ -84,6 +60,15 @@ class Metrics extends Component {
   };
 
 
+  // componentDidMount() {
+  //   this.buildChart();
+  // }
+
+  // componentDidUpdate() {
+  //   this.buildChart();
+  // }
+
+
 
   render() {
     const { classes } = this.props;
@@ -106,10 +91,10 @@ class Metrics extends Component {
           >
             <Tab wrapped label="Nodo Promedio" className={classes.title} {...a11yProps(0)} />
             <Tab wrapped label="Nodo Uno" className={classes.title}{...a11yProps(1)} />
-            <Tab wrapped label="Item Dos" className={classes.title} {...a11yProps(2)} />
-            <Tab wrapped label="Item Tres" className={classes.title} {...a11yProps(3)} />
-            <Tab wrapped label="Item Cuatro" className={classes.title} {...a11yProps(4)} />
-            <Tab wrapped label="Item Cinco" className={classes.title} {...a11yProps(5)} />
+            <Tab wrapped label="Nodo Dos" className={classes.title} {...a11yProps(2)} />
+            <Tab wrapped label="Nodo Tres" className={classes.title} {...a11yProps(3)} />
+            <Tab wrapped label="Nodo Cuatro" className={classes.title} {...a11yProps(4)} />
+            <Tab wrapped label="Nodo Cinco" className={classes.title} {...a11yProps(5)} />
           </Tabs>
         </AppBar>
         {/* Datos Nodo Promedio
@@ -119,13 +104,15 @@ class Metrics extends Component {
           <BigTitle title={'Métricas Promedio'} />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
+
+
+
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
                   title={'Temperatura Aire'}
                   bodyClass={classes.card}
                 >
-
                   <Grid container
                     direction="row"
                     justify="center"
@@ -167,7 +154,6 @@ class Metrics extends Component {
                   title={'Temperatura Tierra'}
                   bodyClass={classes.card}
                 >
-
                   <Grid container
                     direction="row"
                     justify="center"
@@ -178,8 +164,6 @@ class Metrics extends Component {
                       15.23 °c
                     </Typography>
                   </Grid>
-
-
                 </Card>
               </Grid>
 
@@ -189,7 +173,6 @@ class Metrics extends Component {
                   title={'Humedad Tierra'}
                   bodyClass={classes.card}
                 >
-
                   <Grid container
                     direction="row"
                     justify="center"
@@ -200,7 +183,6 @@ class Metrics extends Component {
                       5.23 %
                     </Typography>
                   </Grid>
-
                 </Card>
               </Grid>
 
@@ -220,13 +202,12 @@ class Metrics extends Component {
                       25.12 °C
                     </Typography>
                   </Grid>
-
-
                 </Card>
               </Grid>
 
 
               {/* Metricas dos
+                Metricas dos
                 Metricas dos
                 Metricas dos
                 Metricas dos
@@ -239,20 +220,26 @@ class Metrics extends Component {
                 <Card
                   disableWidgetMenu
                   title={'Temperatura - Tiempo - Humedad - Aire'}
+                //bodyClass={classes.carddos}
                 >
-                  <Line data={data} />
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
                 </Card>
               </Grid>
 
 
 
               {/* 
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
                 Metricas Tres
                 Metricas Tres
                 Metricas Tres */}
@@ -262,17 +249,23 @@ class Metrics extends Component {
                   disableWidgetMenu
                   title={'Temperatura - Tiempo - Humedad - Tierra'}
                 >
-                  <Line data={data} />
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
                 </Card>
               </Grid>
 
 
               {/* 
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
                 Metricas Tres
                 Metricas Tres
                 Metricas Tres
@@ -283,7 +276,15 @@ class Metrics extends Component {
                   disableWidgetMenu
                   title={'Luz - Tiempo'}
                 >
-                  <Line data={data} />
+                  <SimpleLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 90, 65]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                  />
+                  
                 </Card>
               </Grid>
 
@@ -300,39 +301,83 @@ class Metrics extends Component {
           <BigTitle title={'Métricas Nodo Uno'} />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
+
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 1'}
+                  title={'Temperatura Aire'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirTemp" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 2'}
+                  title={'Humedad Aire'}
+                  bodyClass={classes.card}
                 >
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 %
+                    </Typography>
+                  </Grid>
 
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+
+
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 3'}
+                  title={'Temperatura Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 °c
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 4'}
+                  title={'Humedad Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      5.23 %
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
@@ -345,30 +390,74 @@ class Metrics extends Component {
 
 
 
-              <Grid item xs={12} md={8} lg={9}>
-                <Card
-                  disableWidgetMenu
-                  title={'Métrica 5'}
-                >
-                  <Line data={data} />
-                </Card>
-              </Grid>
-
               <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 6'}
+                  title={'Luz'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="Light" src={Sun} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
+
+              <Grid item xs={12} lg={9}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Aire'}
+                //bodyClass={classes.carddos}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
 
               {/* 
                 Metricas Tres
                 Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
+                Metricas Tres */}
+
+              <Grid item xs={12}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Tierra'}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
+
+              {/* 
                 Metricas Tres
                 Metricas Tres
                 Metricas Tres
@@ -377,11 +466,28 @@ class Metrics extends Component {
               <Grid item xs={12}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 7'}
+                  title={'Luz - Tiempo'}
                 >
-
+                  <SimpleLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 90, 65]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                  />
+                  {/* <SimpleDoughnut
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 44]}
+                  /> */}
                 </Card>
               </Grid>
+
+
+
+
             </Grid>
           </Container>
 
@@ -394,39 +500,84 @@ class Metrics extends Component {
           <BigTitle title={'Métricas Nodo Dos'} />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
+
+
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 1'}
+                  title={'Temperatura Aire'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirTemp" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 2'}
+                  title={'Humedad Aire'}
+                  bodyClass={classes.card}
                 >
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 %
+                    </Typography>
+                  </Grid>
 
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+
+
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 3'}
+                  title={'Temperatura Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 °c
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 4'}
+                  title={'Humedad Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      5.23 %
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
@@ -439,30 +590,74 @@ class Metrics extends Component {
 
 
 
-              <Grid item xs={12} md={8} lg={9}>
-                <Card
-                  disableWidgetMenu
-                  title={'Métrica 5'}
-                >
-                  <Line data={data} />
-                </Card>
-              </Grid>
-
               <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 6'}
+                  title={'Luz'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="Light" src={Sun} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
+
+              <Grid item xs={12} lg={9}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Aire'}
+                //bodyClass={classes.carddos}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
 
               {/* 
                 Metricas Tres
                 Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
+                Metricas Tres */}
+
+              <Grid item xs={12}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Tierra'}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
+
+              {/* 
                 Metricas Tres
                 Metricas Tres
                 Metricas Tres
@@ -471,11 +666,26 @@ class Metrics extends Component {
               <Grid item xs={12}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 7'}
+                  title={'Luz - Tiempo'}
                 >
-
+                  <SimpleLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 90, 65]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                  />
+                  {/* <SimpleDoughnut
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 44]}
+                  /> */}
                 </Card>
               </Grid>
+
+
             </Grid>
           </Container>
 
@@ -488,39 +698,83 @@ class Metrics extends Component {
           <BigTitle title={'Métricas Nodo Tres'} />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
+
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 1'}
+                  title={'Temperatura Aire'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirTemp" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 2'}
+                  title={'Humedad Aire'}
+                  bodyClass={classes.card}
                 >
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 %
+                    </Typography>
+                  </Grid>
 
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+
+
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 3'}
+                  title={'Temperatura Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 °c
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 4'}
+                  title={'Humedad Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      5.23 %
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
@@ -533,30 +787,74 @@ class Metrics extends Component {
 
 
 
-              <Grid item xs={12} md={8} lg={9}>
-                <Card
-                  disableWidgetMenu
-                  title={'Métrica 5'}
-                >
-                  <Line data={data} />
-                </Card>
-              </Grid>
-
               <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 6'}
+                  title={'Luz'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="Light" src={Sun} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
+
+              <Grid item xs={12} lg={9}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Aire'}
+                //bodyClass={classes.carddos}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
 
               {/* 
                 Metricas Tres
                 Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
+                Metricas Tres */}
+
+              <Grid item xs={12}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Tierra'}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
+
+              {/* 
                 Metricas Tres
                 Metricas Tres
                 Metricas Tres
@@ -565,11 +863,27 @@ class Metrics extends Component {
               <Grid item xs={12}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 7'}
+                  title={'Luz - Tiempo'}
                 >
-
+                  <SimpleLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 90, 65]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                  />
+                  {/* <SimpleDoughnut
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 44]}
+                  /> */}
                 </Card>
               </Grid>
+
+
+
             </Grid>
           </Container>
 
@@ -583,39 +897,84 @@ class Metrics extends Component {
           <BigTitle title={'Métricas Nodo Cuatro'} />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={6} lg={3}>
+              
+              
+            <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 1'}
+                  title={'Temperatura Aire'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirTemp" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 2'}
+                  title={'Humedad Aire'}
+                  bodyClass={classes.card}
                 >
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 %
+                    </Typography>
+                  </Grid>
 
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+
+
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 3'}
+                  title={'Temperatura Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 °c
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 4'}
+                  title={'Humedad Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      5.23 %
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
@@ -628,30 +987,74 @@ class Metrics extends Component {
 
 
 
-              <Grid item xs={12} md={8} lg={9}>
-                <Card
-                  disableWidgetMenu
-                  title={'Métrica 5'}
-                >
-                  <Line data={data} />
-                </Card>
-              </Grid>
-
               <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 6'}
+                  title={'Luz'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="Light" src={Sun} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
+
+              <Grid item xs={12} lg={9}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Aire'}
+                //bodyClass={classes.carddos}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
 
               {/* 
                 Metricas Tres
                 Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
+                Metricas Tres */}
+
+              <Grid item xs={12}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Tierra'}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
+
+              {/* 
                 Metricas Tres
                 Metricas Tres
                 Metricas Tres
@@ -660,11 +1063,28 @@ class Metrics extends Component {
               <Grid item xs={12}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 7'}
+                  title={'Luz - Tiempo'}
                 >
-
+                  <SimpleLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 90, 65]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                  />
+                  {/* <SimpleDoughnut
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 44]}
+                  /> */}
                 </Card>
               </Grid>
+              
+              
+
+
             </Grid>
           </Container>
 
@@ -678,39 +1098,83 @@ class Metrics extends Component {
           <BigTitle title={'Métricas Nodo Cinco'} />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={6} lg={3}>
+              
+            <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 1'}
+                  title={'Temperatura Aire'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirTemp" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
               <Grid item xs={12} md={6} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 2'}
+                  title={'Humedad Aire'}
+                  bodyClass={classes.card}
                 >
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 %
+                    </Typography>
+                  </Grid>
 
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+
+
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 3'}
+                  title={'Temperatura Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Temperature} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      15.23 °c
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
-              <Grid item xs={12} md={6} lg={3}>
+              <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 4'}
+                  title={'Humedad Tierra'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="AirHum" src={Gout} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      5.23 %
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
 
@@ -723,30 +1187,74 @@ class Metrics extends Component {
 
 
 
-              <Grid item xs={12} md={8} lg={9}>
-                <Card
-                  disableWidgetMenu
-                  title={'Métrica 5'}
-                >
-                  <Line data={data} />
-                </Card>
-              </Grid>
-
               <Grid item xs={12} md={4} lg={3}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 6'}
+                  title={'Luz'}
+                  bodyClass={classes.card}
                 >
-
+                  <Grid container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.containerVar}>
+                    <img alt="Light" src={Sun} className={classes.icon} />
+                    <Typography component="h1" variant={"h5"} className={classes.titleCard}>
+                      25.12 °C
+                    </Typography>
+                  </Grid>
                 </Card>
               </Grid>
+
+              <Grid item xs={12} lg={9}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Aire'}
+                //bodyClass={classes.carddos}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
 
               {/* 
                 Metricas Tres
                 Metricas Tres
-                Metricas Tres
-                Metricas Tres
-                Metricas Tres
+                Metricas Tres */}
+
+              <Grid item xs={12}>
+                <Card
+                  disableWidgetMenu
+                  title={'Temperatura - Tiempo - Humedad - Tierra'}
+                >
+                  <MuiltiLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    secondLabel={'Second dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    yTwoLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, -41, 440, 65]}
+                    dataTwo={[33, -250, 350, 51, 54, 76]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                    twoColor={'#74277444'}
+                  />
+                </Card>
+              </Grid>
+
+
+              {/* 
                 Metricas Tres
                 Metricas Tres
                 Metricas Tres
@@ -755,11 +1263,29 @@ class Metrics extends Component {
               <Grid item xs={12}>
                 <Card
                   disableWidgetMenu
-                  title={'Métrica 7'}
+                  title={'Luz - Tiempo'}
                 >
-
+                  <SimpleLines
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    yOneLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 90, 65]}
+                    oneColor={'rgba(75,192,192,0.4)'}
+                  />
+                  {/* <SimpleDoughnut
+                    labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+                    firstLabel={'First dataset'}
+                    xLabel={'Nombre  x'}
+                    dataOne={[33, 53, 85, 41, 44]}
+                  /> */}
                 </Card>
               </Grid>
+
+
+
+
+
             </Grid>
           </Container>
 

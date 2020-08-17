@@ -20,6 +20,9 @@ const useStyles = (theme) => ({
         //background: '#e4e4e4',
         height: '100%',
     },
+    carddos:{
+        height: '200px',
+    },
 
     containerVar: {
         //background: '#e4e4e4',

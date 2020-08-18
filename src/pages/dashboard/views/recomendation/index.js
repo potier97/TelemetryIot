@@ -10,9 +10,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { WeatherContext } from '../../../../context/weather'
 
 //GRÁFICO
-import SimpleDoughnut from '../../../../components/simpleDoughnut';
+//import SimpleDoughnut from '../../../../components/simpleDoughnut';
 //import '../node_modules/react-vis/dist/style.css';
-import { XYPlot, VerticalBarSeries } from 'react-vis';
+//import { XYPlot, VerticalBarSeries } from 'react-vis';
 
 
 //IMAGENES
@@ -68,17 +68,17 @@ class Recomendation extends Component {
 
 
 
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={8}>
               <Card
                 disableWidgetMenu
                 title={'Temperatura'}
               >
-                <SimpleDoughnut
+                {/* <SimpleDoughnut
                   labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
                   firstLabel={'First dataset'}
                   xLabel={'Nombre  x'}
                   dataOne={[53, 15, 25, 65, 45]}
-                />
+                /> */}
               </Card>
             </Grid>
 
@@ -87,28 +87,11 @@ class Recomendation extends Component {
                 disableWidgetMenu
                 title={'Humedad'}
               >
-                <SimpleDoughnut
-                  labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
-                  firstLabel={'First dataset'}
-                  xLabel={'Nombre  x'}
-                  dataOne={[14, 25, 36, 28, 65]}
-                />
+                
               </Card>
             </Grid>
 
-            <Grid item xs={12} md={4}>
-              <Card
-                disableWidgetMenu
-                title={'Luz'}
-              >
-                <SimpleDoughnut
-                  labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
-                  firstLabel={'First dataset'}
-                  xLabel={'Nombre  x'}
-                  dataOne={[45, 25, 95, 25, 75]}
-                />
-              </Card>
-            </Grid>
+         
 
             {/*  SEGUNDA FILA
             SEGUNDA FILA
@@ -118,7 +101,7 @@ class Recomendation extends Component {
             SEGUNDA FILA */}
 
 
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} >
               <Card
                 disableWidgetMenu
                 title={'Recomendación'}
@@ -127,19 +110,7 @@ class Recomendation extends Component {
               </Card>
             </Grid>
 
-            <Grid item xs={12} md={8}>
-              <Card
-                disableWidgetMenu
-                title={'Mapa de Calor'}
-              >
-                <XYPlot height={400} width={600}>
-                  <VerticalBarSeries data={this.state.data} />
-                </XYPlot>
-              </Card>
-            </Grid>
-
-
-
+           
           </Grid>
         </Container>
       </Grid>

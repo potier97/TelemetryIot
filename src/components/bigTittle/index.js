@@ -2,22 +2,45 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 // styles
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from "./style";
 
 function BigTitle(props) {
-    const { classes } = props;
+    const { classes, action, showAction } = props;
+
     return (
         <>
             <Container maxWidth={false} className={classes.container}>
-                <Grid container spacing={2}>
-                    <Grid className={classes.containerTittle}>
-                        <Typography component="h1" variant="h4" align="left"   noWrap   className={classes.tittle}>
+                <Grid container  >
+                    <Grid container
+                        direction="row"
+                        justify="flex-start"
+                        alignItems="center"
+                        item
+                        xs={8}
+                        sm={6}    >
+                        <Typography component="h1" variant="h4" align="left" noWrap className={classes.tittle}>
                             {props.title}
                         </Typography>
                     </Grid>
+                    {showAction && <Grid container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="center"
+                        item
+                        xs={4}
+                        sm={6}  >
+                        <IconButton
+                            aria-label="expand row"
+                            className={classes.icon}
+                            onClick={action}>
+                            <FilterListIcon />
+                        </IconButton>
+                    </Grid>}
                 </Grid>
             </Container>
         </>

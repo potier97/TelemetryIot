@@ -32,7 +32,7 @@ function Card({
             header
           ) : (
             <React.Fragment>
-              <Typography variant="h5" color="textSecondary" className={classes.title}>
+              <Typography component="h1" variant="h6" className={classes.title}>
                 {title}
               </Typography>
               {!disableWidgetMenu && (

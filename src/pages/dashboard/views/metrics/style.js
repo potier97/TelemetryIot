@@ -7,8 +7,8 @@ const useStyles = (theme) => ({
         background: '#33658a',
     },
     title: {
-        fontWeight: 'bold',
-        //fontFamily: 'Century-Gothic',
+        //fontWeight: 'bold',
+        fontFamily: 'Century-Gothic',
         color: '#fff',
 
     },

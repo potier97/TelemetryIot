@@ -239,7 +239,7 @@ class Plants extends Component {
       isError = true;
     }
     //Temperatura Máxima de la planta
-    if (onlyNumbers.test(this.state.tempMax) && this.state.tempMax.length > 0 && Number(this.state.tempMax) > Number(this.state.tempMin) && Number(this.state.tempMax) < 100) {
+    if (onlyNumbers.test(this.state.tempMax) && this.state.tempMax.length > 0 && Number(this.state.tempMax) > Number(this.state.tempMin) && Number(this.state.tempMax) <= 100) {
       this.setState({
         tempMaxError: false,
         tempMaxErrorMessage: '',
@@ -263,13 +263,13 @@ class Plants extends Component {
       } else {
         this.setState({
           tempMaxError: true,
-          tempMaxErrorMessage: 'Temperatura Máxima debe ser menor a 100 °c',
+          tempMaxErrorMessage: 'Temperatura Máxima debe ser menor o igual a 100 °c',
         });
       }
       isError = true;
     }
     //Temperatura Minima de la planta
-    if (onlyNumbers.test(this.state.tempMin) && this.state.tempMin.length > 0 && Number(this.state.tempMax) > Number(this.state.tempMin) && Number(this.state.tempMin) > 0) {
+    if (onlyNumbers.test(this.state.tempMin) && this.state.tempMin.length > 0 && Number(this.state.tempMax) > Number(this.state.tempMin) && Number(this.state.tempMin) >= 0) {
       this.setState({
         tempMinError: false,
         tempMinErrorMessage: '',
@@ -293,13 +293,13 @@ class Plants extends Component {
       } else {
         this.setState({
           tempMinError: true,
-          tempMinErrorMessage: 'Temperatura Mínima debe ser mayor a 0 °c',
+          tempMinErrorMessage: 'Temperatura Mínima debe ser mayor o igual a 0 °c',
         });
       }
       isError = true;
     }
     //Humedad Máxima de la planta
-    if (onlyNumbers.test(this.state.humMax) && this.state.humMax.length > 0 && Number(this.state.humMax) > Number(this.state.humMin) && Number(this.state.humMax) < 100) {
+    if (onlyNumbers.test(this.state.humMax) && this.state.humMax.length > 0 && Number(this.state.humMax) > Number(this.state.humMin) && Number(this.state.humMax) <= 100) {
       this.setState({
         humMaxError: false,
         humMaxErrorMessage: '',
@@ -323,14 +323,14 @@ class Plants extends Component {
       } else {
         this.setState({
           humMaxError: true,
-          humMaxErrorMessage: 'Humedad Máxima debe ser menor a 100 %',
+          humMaxErrorMessage: 'Humedad Máxima debe ser menor o igual a 100 %',
         });
       }
 
       isError = true;
     }
     //Humedad Mínima de la planta
-    if (onlyNumbers.test(this.state.humMin) && this.state.humMin.length > 0 && Number(this.state.humMax) > Number(this.state.humMin) && Number(this.state.humMin) > 0) {
+    if (onlyNumbers.test(this.state.humMin) && this.state.humMin.length > 0 && Number(this.state.humMax) > Number(this.state.humMin) && Number(this.state.humMin) >= 0) {
       this.setState({
         humMinError: false,
         humMinErrorMessage: '',
@@ -354,13 +354,13 @@ class Plants extends Component {
       } else {
         this.setState({
           humMinError: true,
-          humMinErrorMessage: 'Humedad Mínima debe ser mayor a 0 %',
+          humMinErrorMessage: 'Humedad Mínima debe ser mayor o igual a 0 %',
         });
       }
       isError = true;
     }
     //Luz Máxima de la planta
-    if (onlyNumbers.test(this.state.lightMax) && this.state.lightMax.length > 0 && Number(this.state.lightMax) > Number(this.state.lightMin) && Number(this.state.lightMax) < 5000) {
+    if (onlyNumbers.test(this.state.lightMax) && this.state.lightMax.length > 0 && Number(this.state.lightMax) > Number(this.state.lightMin) && Number(this.state.lightMax) <= 65535) {
       this.setState({
         lightMaxError: false,
         lightMaxErrorMessage: '',
@@ -384,13 +384,13 @@ class Plants extends Component {
       } else {
         this.setState({
           lightMaxError: true,
-          lightMaxErrorMessage: 'Luz Máxima debe ser menor a 5000 Lux',
+          lightMaxErrorMessage: 'Luz Máxima debe ser menor o igual a 65535 Lux',
         });
       }
       isError = true;
     }
     //Luz Mínima de la planta
-    if (onlyNumbers.test(this.state.lightMin) && this.state.lightMin.length > 0 && Number(this.state.lightMax) > Number(this.state.lightMin) && Number(this.state.lightMin) > 0) {
+    if (onlyNumbers.test(this.state.lightMin) && this.state.lightMin.length > 0 && Number(this.state.lightMax) > Number(this.state.lightMin) && Number(this.state.lightMin) >= 0) {
       this.setState({
         lightMinError: false,
         lightMinErrorMessage: '',

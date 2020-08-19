@@ -27,6 +27,7 @@
     "env-cmd": "^10.1.0",
     "firebase": "^7.18.0",
     "google-maps-react": "^2.0.6",
+    "lodash": "^4.17.20",
     "moment": "^2.27.0",
     "notistack": "^0.9.17",
     "react": "^16.13.1",

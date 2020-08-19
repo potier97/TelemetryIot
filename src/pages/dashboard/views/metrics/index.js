@@ -32,6 +32,9 @@ import Modal from '../../../../components/dialog';
 //CONTEXTO
 import { WeatherContext } from '../../../../context/weather';
 
+//FORMAT DATA
+//import { formatExpenses } from './config'
+
 //ESTILOS
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js'
@@ -161,9 +164,13 @@ class Metrics extends Component {
 
   render() {
     const { classes, width } = this.props;
+    const { weather  } = this.context;
     const isDesktop = isWidthUp('md', width);
-    //const { weather  } = this.context;
-    //console.log(weather)
+
+    //const dataWheater = formatExpenses(weather);
+    //console.log(dataWheater)
+
+
     return (
 
       <Grid className={classes.root}>

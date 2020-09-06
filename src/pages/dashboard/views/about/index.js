@@ -7,6 +7,13 @@ import Maps from '../../../../components/maps';
 import Typography from '@material-ui/core/Typography';
 import BigTitle from '../../../../components/bigTittle'
 import CssBaseline from '@material-ui/core/CssBaseline';
+
+//Constant
+import { WEATHERAPI, LAT, LNG, LANG } from '../../../../constant'
+import Axios from 'axios';
+
+
+//Stiles
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js';
 
@@ -16,41 +23,224 @@ class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      latPoss: 4.724277,
-      lngPoss: -73.968302,
+
+      latPoss: 4.736610,
+      lngPoss: -73.907915,
       dataSummary: [
         {
           id: '0',
-          key: 'Dato1',
-          value: 'Valor1'
+          idName: 'city_name',
+          key: 'Ubicación',
+          value: 'no Data',
+          show: true
         },
         {
           id: '1',
-          key: 'Dato2',
-          value: 'Valor2'
+          idName: 'ob_time',
+          key: 'Última observación',
+          value: 'no Data',
+          show: true
         },
         {
           id: '2',
-          key: 'Dato3',
-          value: 'Valor3'
+          idName: 'temp',
+          key: 'Temperatura (Celcius)',
+          value: 'no Data',
+          show: true
         },
         {
           id: '3',
-          key: 'Dato4',
-          value: 'Valor4'
+          idName: 'app_temp',
+          key: 'Temperatura aparente (Celcius)',
+          value: 'no Data',
+          show: true
         },
         {
           id: '4',
-          key: 'Dato5',
-          value: 'Valor5'
+          idName: 'rh',
+          key: 'Humedad relativa (%)',
+          value: 'no Data',
+          show: true
         },
         {
           id: '5',
-          key: 'Dato6',
-          value: 'Valor6'
+          idName: 'dewpt',
+          key: 'Punto de rocío (Celcius)',
+          value: 'no Data',
+          show: true
         },
+        {
+          id: '6',
+          idName: 'clouds',
+          key: 'Cobertura de nubes (%)',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '7',
+          idName: 'wind_cdir_full',
+          key: 'Dirección del viento',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '8',
+          idName: 'wind_dir',
+          key: 'Dirección del viento (grados)',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '9',
+          idName: 'wind_spd',
+          key: 'Velocidad del viento (m/s)',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '10',
+          idName: 'pres',
+          key: 'Presión (mb)',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '11',
+          idName: 'slp',
+          key: 'Presión al nivel del mar (mb)',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '12',
+          idName: 'solar_rad',
+          key: 'Radiación solar estimada (W/m\u00b2)',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '13',
+          idName: 'uv',
+          key: 'Índice UV (0-11 +)',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '14',
+          idName: 'elev_angle',
+          key: 'Ángulo de elevación solar (grados)',
+          value: 'no Data',
+          show: true
+        },
+        {
+          id: '15',
+          idName: 'h_angle',
+          key: 'Ángulo horario solar (grados)',
+          value: 'no Data',
+          show: true
+        },
+      ],
 
-      ]
+      // city_name: Nombre de la ciudad.
+      // ob_time: Hora de la última observación (AAAA-MM-DD HH: MM). 
+
+      // temp: Temperatura (Celsius por defecto). 
+      // app_temp: Temperatura aparente / "Se siente como" (Celcius predeterminado). 
+
+      // rh: Humedad relativa (%).
+      // dewpt: Punto de rocío (Celcius predeterminado).
+
+      // clouds: Cobertura de nubes (%). 
+      // wind_cdir_full: Dirección verbal del viento.
+      // wind_dir: Dirección del viento (grados).
+      // wind_spd: Velocidad del viento (m / s por defecto)
+
+      // pres: Presión (mb).
+      // slp: Presión al nivel del mar (mb). 
+
+      // solar_rad: Radiación solar estimada (W / m ^ 2). 
+      // uv: Índice UV (0-11 +). 
+      // elev_angle: Ángulo de elevación solar (grados).
+      // h_angle: Ángulo horario solar (grados).
+    }
+  }
+
+
+  async componentDidMount() {
+
+    try {
+      //const getWeather = await Axios.post(WEATHERAPI + '?lang=' + LANG + "&lat=" + LAT + "&lon=" + LNG + "&key=" + process.env.REACT_APP_API_WEATHER)  
+      const getWeather = await Axios.get(WEATHERAPI, {
+        params: {
+          key: process.env.REACT_APP_API_WEATHER,
+          lat: LAT,
+          lon: LNG,
+          lang: LANG
+        }
+      });
+      //console.log(getWeather);
+      if (getWeather.status === 200) {
+        //console.log('Ok')
+        const weather = getWeather.data.data[0];
+        //console.log(weather);
+        await this.setState(prevState => ({
+          dataSummary: prevState.dataSummary.map(data => {
+            if (data.idName === 'city_name') {
+              let value = weather.city_name;
+              return { ...data, value }
+            } else if (data.idName === 'ob_time') {
+              let value = weather.ob_time;
+              return { ...data, value }
+            } else if (data.idName === 'temp') {
+              let value = weather.temp;
+              return { ...data, value }
+            } else if (data.idName === 'app_temp') {
+              let value = weather.app_temp;
+              return { ...data, value }
+            } else if (data.idName === 'rh') {
+              let value = weather.rh;
+              return { ...data, value }
+            } else if (data.idName === 'dewpt') {
+              let value = weather.dewpt;
+              return { ...data, value }
+            } else if (data.idName === 'clouds') {
+              let value = weather.clouds;
+              return { ...data, value }
+            } else if (data.idName === 'wind_cdir_full') {
+              let value = weather.wind_cdir_full;
+              return { ...data, value }
+            } else if (data.idName === 'wind_dir') {
+              let value = weather.wind_dir;
+              return { ...data, value }
+            } else if (data.idName === 'wind_spd') {
+              let value = weather.wind_spd;
+              return { ...data, value }
+            } else if (data.idName === 'pres') {
+              let value = weather.pres;
+              return { ...data, value }
+            } else if (data.idName === 'slp') {
+              let value = weather.slp;
+              return { ...data, value }
+            } else if (data.idName === 'solar_rad') {
+              let value = weather.solar_rad;
+              return { ...data, value }
+            } else if (data.idName === 'uv') {
+              let value = weather.uv;
+              return { ...data, value }
+            } else if (data.idName === 'elev_angle') {
+              let value = weather.elev_angle;
+              return { ...data, value }
+            } else if (data.idName === 'h_angle') {
+              let value = weather.h_angle;
+              return { ...data, value }
+            } else {
+              return { ...data }
+            }
+          })
+        }));
+      }
+    } catch (error) {
+      console.log('error: ', error)
     }
   }
 
@@ -72,9 +262,27 @@ class About extends Component {
                   disableWidgetMenu
                   title={'Resumen'} >
                   <Typography component="h1" variant="body1" align='justify' className={classes.summary} >
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-                    "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
-                </Typography>
+                    {`Este Proyecto consiste en realizar el análisis de las distintas variables ambientales, que son comunes en un cultivo agrícola 
+                     de tipo invernadero, para detectar qué parámetros y comportamientos “constantes o irregulares”, favorecen o perjudican a los mismos, 
+                     las cuales se han trabajado mediante las técnicas tradicionales, proponiendo así tecnologías que mejoren la productividad a los modelos 
+                     de bajo rendimiento. \n\n `}
+                    <br />
+                    <br />
+                    <br />
+                    {`Implementando un sistema de redes, compuesta de varios dispositivos IoT, desplegados en el cultivo, siendo capaces  
+                     de adquirir y almacenar datos de las variables presentes, procesar y/o filtrar la información, y finalmente analizarla para obtener datos  
+                     de valor, y así, poder entregar una respuesta del comportamiento del cultivo estudiado. \n\n `}
+                    <br />
+                    <br />
+                    <br />
+                    {`Se desarrollará en sectores de cultivos agrícolas ubicados a una altura aproximadamente o superior a los 2600 MSNM. \n\n `}
+
+                    {/* El proyecto iniciará y se realizará desde el 
+                    segundo semestre del 2019 y finalizará en la última semana del segundo semestre del 2020, siguiendo la realización de tareas y finalizando 
+                    los hitos presentes en el cronograma.  */}
+
+
+                  </Typography>
                 </Card>
               </Grid>
 
@@ -90,6 +298,7 @@ class About extends Component {
                   >
 
                     {this.state.dataSummary.map(data => (
+                      data.show &&
                       <Grid item xs={12} className={classes.containerSummary} key={data.id} >
                         <Typography component="h1" variant="body1" align='left' className={classes.inscriptionKey} >
                           {data.key}
@@ -109,7 +318,7 @@ class About extends Component {
               <Grid item xs={12}>
                 <Card
                   disableWidgetMenu
-                  title={'Ubicación'} >
+                  title={'Ubicación - La Calera - Cundinamarca'} >
                   <React.StrictMode>
                     <Maps
                       lat={this.state.latPoss}

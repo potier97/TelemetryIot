@@ -66,7 +66,7 @@ class Metrics extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stateTabs: 1,
+      stateTabs: 0,
 
 
       //Modal
@@ -164,7 +164,7 @@ class Metrics extends Component {
 
   render() {
     const { classes, width } = this.props;
-    const { weather  } = this.context;
+    //const { weather  } = this.context;
     const isDesktop = isWidthUp('md', width);
 
     //const dataWheater = formatExpenses(weather);

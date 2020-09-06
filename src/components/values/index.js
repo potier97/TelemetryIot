@@ -4,13 +4,11 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-
 //lOGOS
 import TimelineIcon from '@material-ui/icons/Timeline';
-import StorageIcon from '@material-ui/icons/Storage';
 import RouterIcon from '@material-ui/icons/Router';
-// eslint-disable-next-line
-import CloudIcon from '@material-ui/icons/Cloud';
+import CloudQueueIcon from '@material-ui/icons/CloudQueue';
+
 
 //ESTILOS
 import { withStyles } from '@material-ui/core/styles';
@@ -36,12 +34,13 @@ class Values extends Component {
                                     
 
                                     <RouterIcon className={classes.icon} />
-                                    <Typography variant="h6" className={classes.title}>
-                                    OBJETIVO 1
+                                    <Typography variant="h4" className={classes.title}>
+                                       Telemetría
                                     </Typography>
-                                    <Typography variant="h5" className={classes.contenttext}>
-                                        {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                                        {', go for a mini-vacation just a few subway stops away from your home.'}
+                                    <Typography variant="h5" align='center' className={classes.contenttext}>
+                                        {'Establecer un protocolo de comunicación de los dispositivos IoT enfocados a la '}
+                                        {'medición de variables del entorno y del clima, para garantizar una conexión segura '}
+                                        {'y estable a una base de datos.'}
                                     </Typography>
                                 </div>
                             </Grid>
@@ -52,12 +51,13 @@ class Values extends Component {
                                    
 
                                     <TimelineIcon className={classes.icon} />
-                                    <Typography variant="h6" className={classes.title}>
-                                    OBJETIVO 2
+                                    <Typography variant="h4" className={classes.title}>
+                                        Análisis
                                     </Typography>
-                                    <Typography variant="h5" className={classes.contenttext}>
-                                        {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                                        {'your Sundays will not be alike.'}
+                                    <Typography variant="h5" align='center' className={classes.contenttext}>
+                                        {'Identificar las variables del entorno y del clima que generen mayor '} 
+                                        {'impacto en el cultivo agrícola estudiado a través de procedimientos '} 
+                                        {'de Analítica. '}
                                     </Typography>
                                 </div>
                             </Grid>
@@ -67,13 +67,14 @@ class Values extends Component {
                                 <div className={classes.item}>
                                  
 
-                                    <StorageIcon className={classes.icon} />
-                                    <Typography variant="h6" className={classes.title}>
-                                        OBJETIVO 3
+                                    <CloudQueueIcon className={classes.icon} />
+                                    <Typography variant="h4" className={classes.title}>
+                                        Nube
                                     </Typography>
-                                    <Typography variant="h5" className={classes.contenttext}>
-                                        {'By registering, you will access specially negotiated rates '}
-                                        {'that you will not find anywhere else.'}
+                                    <Typography variant="h5" align='center' className={classes.contenttext}>
+                                        {'Establecer una plataforma de servicios y almacenamiento en la nube, '}
+                                        {'para difusión y uso de la información acerca del cultivo agrícola '}
+                                        {'estudiado. '}
                                     </Typography>
                                 </div>
                             </Grid>

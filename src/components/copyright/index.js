@@ -10,7 +10,7 @@ function Copyright(props) {
             align="center"
             style={props.white ? { 'color': '#fff', fontFamily: 'Century-Gothic', } : { 'color': '#18202c', fontFamily: 'Century-Gothic', }}> 
             {'Copyright © '}
-            <Link color="inherit" href="https://github.com/potier97/TelemetryIot" target="_blank">
+            <Link color="inherit" href="https://github.com/potier97/AgroIot" target="_blank">
                 Telemetry Iot
             </Link>{' '}
             {new Date().getFullYear()}

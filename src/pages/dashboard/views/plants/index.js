@@ -535,7 +535,7 @@ class Plants extends Component {
       <Grid className={classes.root}>
         <CssBaseline />
 
-        <BigTitle title={'Frutas, Verduraz y Cereales'} />
+        <BigTitle title={'Frutas, Verduras y Cereales'} />
 
         <Container maxWidth={false} className={classes.container}>
           <Grid container spacing={3}>

@@ -24,6 +24,13 @@ import { WeatherContext } from '../../../../context/weather'
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js'
 
+// {/* <SimpleDoughnut
+//                   labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
+//                   firstLabel={'First dataset'}
+//                   xLabel={'Nombre  x'}
+//                   dataOne={[53, 15, 25, 65, 45]}
+// /> */}
+
 
 class Recomendation extends Component {
 
@@ -68,24 +75,25 @@ class Recomendation extends Component {
 
 
 
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={7}>
               <Card
                 disableWidgetMenu
-                title={'Temperatura'}
+                title={'Mapa de Calor'}
               >
-                {/* <SimpleDoughnut
-                  labelData={["Jan", "Feb", "Mar", "Apr", "May"]}
-                  firstLabel={'First dataset'}
-                  xLabel={'Nombre  x'}
-                  dataOne={[53, 15, 25, 65, 45]}
-                /> */}
+               <Grid  style={{
+                 height: 500
+               }} 
+               
+               />
+
+
               </Card>
             </Grid>
 
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={5}>
               <Card
                 disableWidgetMenu
-                title={'Humedad'}
+                title={'Tabla'}
               >
                 
               </Card>
@@ -101,14 +109,14 @@ class Recomendation extends Component {
             SEGUNDA FILA */}
 
 
-            <Grid item xs={12} >
+            {/* <Grid item xs={12} >
               <Card
                 disableWidgetMenu
                 title={'Recomendación'}
               >
 
               </Card>
-            </Grid>
+            </Grid> */}
 
            
           </Grid>

@@ -21,8 +21,8 @@ const useStyles = (theme) => ({
     icon:{
         color: '#fff',
         margin: theme.spacing(2),
-        width: theme.spacing(18),
-        height: theme.spacing(18),
+        width: theme.spacing(20),
+        height: theme.spacing(20),
     },
     title: {
         marginTop: theme.spacing(5),

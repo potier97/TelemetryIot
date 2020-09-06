@@ -24,7 +24,7 @@ import { AuthContext } from '../../context/auth'
 class Root extends Component {
     render() {
         const { children, classes, width } = this.props;
-        const isDesktop = isWidthUp('md', width);
+        const isDesktop = isWidthUp('sm', width);
         const { authReady } = this.context;
 
         if (!authReady) { 

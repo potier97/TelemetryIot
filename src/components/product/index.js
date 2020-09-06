@@ -32,12 +32,12 @@ class Product extends Component {
                         >
 
                             <Typography color="inherit" align="center" variant="h3" marked="center" className={classes.title}>
-                                Nombre Proyecto
-                        </Typography>
+                                Red De Telemetría para el Análisis Productivo de Terrenos en Cultivos Agrícolas
+                            </Typography>
 
                             <Typography color="inherit" align="center" variant="h5" className={classes.subtitle}>
-                                Lorem Ipsum dolor
-                        </Typography>
+                                Caracterizar las variables del entorno y del clima que inciden en el cultivo agrícola de tipo invernadero
+                            </Typography>
 
                             <Button
                                 color="secondary"

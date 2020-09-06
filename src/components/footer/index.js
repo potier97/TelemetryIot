@@ -67,7 +67,7 @@ class Footer extends Component {
                                         alignItems="center">
                                         <LinkedInIcon className={classes.iconColor} />
                                         <Typography variant="body2" gutterBottom className={classes.title}>
-                                            @usuario
+                                            @potier97
                                         </Typography>
                                     </Grid>
                                     <Grid container
@@ -76,7 +76,7 @@ class Footer extends Component {
                                         alignItems="center">
                                         <MailOutlineIcon className={classes.iconColor} />
                                         <Typography variant="body2" gutterBottom className={classes.title}>
-                                            correo@ejemplo.com
+                                            nicolaspotier97@hotmail.com
                                             </Typography>
                                     </Grid>
                                 </Grid>
@@ -95,7 +95,7 @@ class Footer extends Component {
                                         alignItems="center">
                                         <LinkedInIcon className={classes.iconColor} />
                                         <Typography variant="body2" gutterBottom className={classes.title}>
-                                            @usuario
+                                            @sergio-almeciga
                                             </Typography>
                                     </Grid>
                                     <Grid container
@@ -104,7 +104,7 @@ class Footer extends Component {
                                         alignItems="center">
                                         <MailOutlineIcon className={classes.iconColor} />
                                         <Typography variant="body2" gutterBottom className={classes.title}>
-                                            correo@ejemplo.com
+                                            sergioalme24@hotmail.com
                                         </Typography>
                                     </Grid>
                                 </Grid>

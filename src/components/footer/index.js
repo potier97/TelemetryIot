@@ -50,10 +50,11 @@ class Footer extends Component {
                                 justify="center"
                                 alignItems="center"
                                 //className={classes.iconsWrapper}
-                                spacing={2}>
+                                //spacing={2}
+                                >
 
                                 <Grid item
-                                    xs={6}
+                                    xs={12} sm={6}
                                     container
                                     direction="column"
                                     justify="center"
@@ -61,7 +62,10 @@ class Footer extends Component {
                                 //className={classes.iconContainer}
                                 >
 
-                                    <Grid container
+                                    <Grid //item
+                                        //xs={12}
+                                        container
+                                        //className={classes.iconContainer}
                                         direction="row"
                                         justify="flex-start"
                                         alignItems="center">
@@ -82,7 +86,7 @@ class Footer extends Component {
                                 </Grid>
 
                                 <Grid item
-                                    xs={6}
+                                    xs={12} sm={6}
                                     container
                                     direction="column"
                                     justify="center"

@@ -13,7 +13,7 @@ const useStyles = (theme) => ({
         backgroundPosition: 'center',
         backgroundSize: 'cover',  
         alignItems: 'center', 
-        height: 'calc(100% - 64px)',
+        minHeight: 'calc(100% - 64px)',
         [theme.breakpoints.up('sm')]: {
             height: 'calc(100% - 70px)',
         },

@@ -261,7 +261,7 @@ class About extends Component {
                 <Card
                   disableWidgetMenu
                   title={'Resumen'} >
-                  <Typography component="h1" variant="body1" align='justify' className={classes.summary} >
+                  <Typography component="h1" variant="h6" align='justify' className={classes.summary} >
                     {`Este Proyecto consiste en realizar el análisis de las distintas variables ambientales, que son comunes en un cultivo agrícola 
                      de tipo invernadero, para detectar qué parámetros y comportamientos “constantes o irregulares”, favorecen o perjudican a los mismos, 
                      las cuales se han trabajado mediante las técnicas tradicionales, proponiendo así tecnologías que mejoren la productividad a los modelos 

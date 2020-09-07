@@ -24,8 +24,8 @@ class About extends Component {
     super(props);
     this.state = {
 
-      latPoss: 4.736610,
-      lngPoss: -73.907915,
+      latPoss: 4.732539, //4.732539 anterior => 4.736610
+      lngPoss: -73.911276, //-73.911276 anterior => -73.907915
       dataSummary: [
         {
           id: '0',

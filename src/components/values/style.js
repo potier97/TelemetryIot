@@ -1,10 +1,26 @@
+//IMAGEN
+import noFoundBackground from "../../images/values2.jpg"
+
+
 
 const useStyles = (theme) => ({
 
     root: {
         display: 'flex',
         overflow: 'hidden',
-        backgroundColor: "#3F7D20", //72B01D D65108  3F7D20
+        //backgroundColor: "#72B01D",
+        //rgba(63, 125, 32, 0.46) --> Verde  #3F7D20
+        //rgba(114, 176, 29, 0.51) --> Verde Claro   #72B01D
+        //rgba(214, 81, 8, 0.51)  --> Naranja #D65108
+
+        backgroundImage: `linear-gradient(rgba(63, 125, 32, 0.5), rgba(63, 125, 32, 0.5)),  url(${noFoundBackground})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+         // minHeight: 'calc(100% - 64px)',
+        // [theme.breakpoints.up('sm')]: {
+        //     height: 'calc(100% - 70px)',
+        // }, 
     },
     container: {
         marginTop: theme.spacing(15),

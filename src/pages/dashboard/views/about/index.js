@@ -12,6 +12,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { WEATHERAPI, LAT, LNG, LANG } from '../../../../constant'
 import Axios from 'axios';
 
+//Images
+import Greenhouse from '../../../../images/greenhouse.jpg'
+
 
 //Stiles
 import { withStyles } from '@material-ui/core/styles';
@@ -276,13 +279,19 @@ class About extends Component {
                     <br />
                     <br />
                     {`Se desarrollará en sectores de cultivos agrícolas ubicados a una altura aproximadamente o superior a los 2600 MSNM. \n\n `}
-
-                    {/* El proyecto iniciará y se realizará desde el 
-                    segundo semestre del 2019 y finalizará en la última semana del segundo semestre del 2020, siguiendo la realización de tareas y finalizando 
-                    los hitos presentes en el cronograma.  */}
-
+                    <br />
+                    <br />
+                    <br /> 
 
                   </Typography>
+                  <Grid container
+                    direction="column"
+                    justify="center"
+                    alignItems="stretch"
+                    item
+                    xs={12} >
+                    <img src={Greenhouse} alt="grenhouse" width={'100%'} height={'100%'}   />  
+                  </Grid>
                 </Card>
               </Grid>
 

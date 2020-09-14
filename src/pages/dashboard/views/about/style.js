@@ -1,8 +1,7 @@
+
 const useStyles = (theme) => ({
     root: {
-        //height: '100%',
         background: '#e4e4e4', 
-        //width: '50%',
     },
     container: {
         paddingTop: theme.spacing(4),
@@ -19,6 +18,12 @@ const useStyles = (theme) => ({
     containerSummary:{
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(2),
+    },
+
+    greenhouseImg:{ 
+        
+        // width:'100%',
+        // height:'100%'
     },
 
     inscriptionKey:{

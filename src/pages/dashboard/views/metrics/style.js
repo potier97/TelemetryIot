@@ -3,6 +3,18 @@ const useStyles = (theme) => ({
         //height: '100%',
         background: '#e4e4e4',
     },
+    subroot: {
+        height: '100%',
+        background: '#e4e4e4',
+    },
+    subcontainer: {
+        display: 'flex',
+        //backgroundColor: 'red',
+        height: '100%',
+    },
+    dots: {
+        color: '#33658a',
+    },
     appbar: {
         background: '#33658a',
     },
@@ -20,7 +32,7 @@ const useStyles = (theme) => ({
         //background: '#e4e4e4',
         height: '100%',
     },
-    carddos:{
+    carddos: {
         height: '200px',
     },
 

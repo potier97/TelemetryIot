@@ -23,7 +23,6 @@ export function watchUserChnages(callback) {
 export function watchPlants(callback) {
     const unsub = Db.collection(process.env.REACT_APP_DATABASE_ID_PLANTS).onSnapshot((snapshot) => {
         const docs = []
-
         snapshot.forEach((doc) => {
             const data = doc.data();
             docs.push({
@@ -44,6 +43,7 @@ export function watchWeather(callback) {
 
         snapshot.forEach((doc) => {
             const data = doc.data();
+            //console.log(data)
             docs.push({
                 ...data,
                 id: doc.id

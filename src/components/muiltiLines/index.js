@@ -145,13 +145,13 @@ function MultiLines(props) {
                             time: {
                                 //unitStepSize: 10, cada cuantas ñineas se dibuja un label 
                                 //stepSize: 5, cada cuantas ñineas se dibuja un label
-                                //unit: "hour",  iempre muestre unidades por la unidad que se defina
+                                //unit: "hour",  Siempre muestre unidades por la unidad que se defina
                                 //   Si se define, obligará a la unidad a ser de cierto tipo. Consulte la sección Unidades de tiempo a continuación para obtener más detalles.
                                 stepSize: 1,
                                  
                                 //seleccionar formato en:
                                 //https://momentjs.com/docs/#/displaying/format/
-                                
+                                //unit: 'minute',
                                 tooltipFormat: "dddd, MMMM Do YYYY, H:m:s",
                                 displayFormats: {
                                     hour: 'MMM D YYYY, H:m:s',
@@ -213,7 +213,8 @@ function MultiLines(props) {
                                 display: !isDesktop, //No ver el numero
                                 beginAtZero: true,
                                 suggestedMin: detNumber.min - 5,
-                                suggestedMax: detNumber.max + 5
+                                suggestedMax: detNumber.max + 5,
+                                //stepSize: 20
                             },
                             //offset: true,
                             gridLines: {

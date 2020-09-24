@@ -14,8 +14,8 @@ export class AuthContexProvider extends Component {
         }
     };
 
-    componentDidMount() {
-        watchUserChnages((user) => {
+    async componentDidMount() {
+        this.userWatcherUnsub = await watchUserChnages((user) => {
             if (user) {
                 this.setState({
                     authReady: true,
@@ -31,6 +31,12 @@ export class AuthContexProvider extends Component {
             }
         })
     };
+
+    componentWillUnmount() {
+        if (this.userWatcherUnsub) {
+            this.userWatcherUnsub();
+        }
+    }
 
     render() {
         return (

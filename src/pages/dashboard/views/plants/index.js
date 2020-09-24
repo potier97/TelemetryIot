@@ -8,6 +8,7 @@ import BigTitle from '../../../../components/bigTittle';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 //COMPONENTES DE LA TABLA
 import Table from '@material-ui/core/Table';
@@ -20,6 +21,11 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import CreateIcon from '@material-ui/icons/Create';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+
+
+//SPINNER
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 //CONTEXTO
 import { PlantsContext } from '../../../../context/plant'
@@ -527,9 +533,36 @@ class Plants extends Component {
 
 
   render() {
-    const { classes } = this.props;
-    const { plants } = this.context
+    const { classes, width } = this.props;
+    const { plants, dataReady } = this.context
+    const isDesktop = isWidthUp('md', width);
     //console.log(plants)
+
+
+    if (!dataReady) {
+      return (
+        <Grid className={classes.subroot}>
+          <CssBaseline />
+
+          <Grid container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            className={classes.subcontainer}>
+
+
+            <CircularProgress
+              className={classes.dots}
+              size={isDesktop ? 250 : 100}
+              thickness={isDesktop ? 6 : 4}
+            />
+
+          </Grid>
+        </Grid>
+      )
+    }
+
+
     return (
 
       <Grid className={classes.root}>
@@ -838,7 +871,7 @@ Plants.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withSnackbar(withStyles(useStyles)(Plants));
+export default withSnackbar(withStyles(useStyles)(withWidth()(Plants)));
 
 
 

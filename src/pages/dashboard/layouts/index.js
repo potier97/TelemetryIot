@@ -37,7 +37,7 @@ class Main extends Component {
     const { children, classes, auth, width } = this.props; 
     const isDesktop = isWidthUp('md', width);
     //console.log(isDesktop)
-
+    //console.log('algo')
     return (
       <>
         <div

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const RouteWithLayout = props => {
   const { layout: Layout, component: Component, ...rest } = props;
+  //console.log('algo')
   return (
     <Route
       {...rest}

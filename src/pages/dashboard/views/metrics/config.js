@@ -1,42 +1,47 @@
+import maxBy from 'lodash/maxBy'
 
 
-return function formatData(weather) {
 
-    const weatherByType = groupBy(weather, n => n.type);
+export function formatWeather(weather) {
 
-    return Object.entries(weatherByType).map(([key, arr]) => {
+    
+    
+    let lastWeather = maxBy(weather,"dateTimeCaptureTelemetry");
 
-        const totals = arr.reduce((result, expense) => {
 
-            const date = moment(expense.date).startOf('day');
+    // return Object.entries(weatherByType).map(([key, arr]) => {
 
-            const key = date.format('DD MMM, YYYY');
+    //     const totals = arr.reduce((result, expense) => {
 
-            if (!result[key]) {
-                result[key] = { total: 0, timestamp: date.valueOf() };
-            }
+    //         const date = moment(expense.date).startOf('day');
 
-            result[key].total += expense.amount;
+    //         const key = date.format('DD MMM, YYYY');
 
-            return result;
-        }, {});
+    //         if (!result[key]) {
+    //             result[key] = { total: 0, timestamp: date.valueOf() };
+    //         }
 
-        let data = Object.entries(totals).map(([key, data]) => ({
-            x: key,
-            y: data.total,
-            timestamp: data.timestamp,
-        }));
+    //         result[key].total += expense.amount;
 
-        data.sort((a, b) => {
-            if (a.timestamp > b.timestamp) return 1;
-            if (a.timestamp < b.timestamp) return -1;
-            return 0;
-        });
+    //         return result;
+    //     }, {});
 
-        return {
-            type: key,
-            data,
-        };
-    });
+    //     let data = Object.entries(totals).map(([key, data]) => ({
+    //         x: key,
+    //         y: data.total,
+    //         timestamp: data.timestamp,
+    //     }));
+
+    //     data.sort((a, b) => {
+    //         if (a.timestamp > b.timestamp) return 1;
+    //         if (a.timestamp < b.timestamp) return -1;
+    //         return 0;
+    //     });
+
+    //     return {
+    //         type: key,
+    //         data,
+    //     };
+    // });
 }
 

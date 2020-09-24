@@ -290,7 +290,7 @@ class About extends Component {
                     alignItems="stretch"
                     item
                     xs={12} >
-                    <img src={Greenhouse} alt="grenhouse" width={'100%'} height={'100%'}   />  
+                    <img src={Greenhouse} alt="grenhouse" width={'100%'} height={'100%'}  className={classes.greenhouse} />  
                   </Grid>
                 </Card>
               </Grid>

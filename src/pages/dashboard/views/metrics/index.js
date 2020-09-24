@@ -14,6 +14,10 @@ import Hidden from '@material-ui/core/Hidden';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 
+//SPINNER
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 //IMAGENES
 import TemperatureAir from '../../../../images/temperatureEarth.svg';
 import GoutAir from '../../../../images/goutEarth.svg';
@@ -33,7 +37,7 @@ import Modal from '../../../../components/dialog';
 import { WeatherContext } from '../../../../context/weather';
 
 //FORMAT DATA
-//import { formatExpenses } from './config'
+//import { formatWeather } from './config'
 
 //ESTILOS
 import { withStyles } from '@material-ui/core/styles';
@@ -42,15 +46,8 @@ import useStyles from './style.js'
 //GRÁFICO   
 import MuiltiLines from '../../../../components/muiltiLines';
 import SimpleLines from '../../../../components/simpleLines';
-import DateLines from '../../../../components/dateLines';
+//import DateLines from '../../../../components/dateLines';
 
-
-function a11yProps(index) {
-  return {
-    id: `nav-tab-${index}`,
-    'aria-controls': `nav-tabpanel-${index}`,
-  };
-};
 
 
 
@@ -62,6 +59,10 @@ function a11yProps(index) {
 
 
 class Metrics extends Component {
+
+
+
+
 
   constructor(props) {
     super(props);
@@ -83,7 +84,8 @@ class Metrics extends Component {
       changeRange: {},
       isRange: false,
 
-
+      isData: false,
+      dataStore: {},
 
     };
     this.handleChange = this.handleChange.bind(this);
@@ -95,12 +97,15 @@ class Metrics extends Component {
   };
 
 
+
+
   componentDidMount() {
     this.setState({
-      changeRange: this.state.oneRange
+      changeRange: this.state.oneRange,
+      isData: true,
     })
+    //console.log('ok')
   }
-
 
 
   handleChange(event) {
@@ -114,8 +119,6 @@ class Metrics extends Component {
 
   handleTabs(event, newValue) {
     const value = newValue;
-    //console.log(other)
-    //console.log(name)
     this.setState({ stateTabs: value });
   };
 
@@ -152,27 +155,41 @@ class Metrics extends Component {
   };
 
 
-  // componentDidMount() {
-  //   this.buildChart();
-  // }
-
-  // componentDidUpdate() {
-  //   this.buildChart();
-  // }
-
-
-
   render() {
     const { classes, width } = this.props;
-    //const { weather  } = this.context;
+    const { weather, lastWeather, dataReady } = this.context;
     const isDesktop = isWidthUp('md', width);
 
-    //const dataWheater = formatExpenses(weather);
-    //console.log(dataWheater)
+
+
+
+    if (!dataReady) {
+      return (
+        <Grid className={classes.subroot}>
+          <CssBaseline />
+
+          <Grid container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            className={classes.subcontainer}>
+
+
+            <CircularProgress
+              className={classes.dots}
+              size={isDesktop ? 250 : 100}
+              thickness={isDesktop ? 6 : 4}
+            />
+
+          </Grid>
+        </Grid>
+      )
+    }
+
+    console.log(weather)
 
 
     return (
-
       <Grid className={classes.root}>
         <CssBaseline />
 
@@ -185,12 +202,12 @@ class Metrics extends Component {
             scrollButtons="on"
           >
             {/* component="h1" variant="h5" */}
-            <Tab wrapped label="Nodo Promedio" className={classes.title} {...a11yProps(0)} />
-            <Tab wrapped label="Nodo Uno" className={classes.title}{...a11yProps(1)} />
-            <Tab wrapped label="Nodo Dos" className={classes.title} {...a11yProps(2)} />
-            <Tab wrapped label="Nodo Tres" className={classes.title} {...a11yProps(3)} />
-            <Tab wrapped label="Nodo Cuatro" className={classes.title} {...a11yProps(4)} />
-            <Tab wrapped label="Nodo Cinco" className={classes.title} {...a11yProps(5)} />
+            <Tab wrapped label="Promedio" className={classes.title} id='nav-tab-0' aria-controls='nav-tabpanel-0' />
+            <Tab wrapped label="Nodo Uno" className={classes.title} id='nav-tab-1' aria-controls='nav-tabpanel-1' />
+            <Tab wrapped label="Nodo Dos" className={classes.title} id='nav-tab-2' aria-controls='nav-tabpanel-2' />
+            <Tab wrapped label="Nodo Tres" className={classes.title} id='nav-tab-3' aria-controls='nav-tabpanel-3' />
+            <Tab wrapped label="Nodo Cuatro" className={classes.title} id='nav-tab-4' aria-controls='nav-tabpanel-4' />
+            <Tab wrapped label="Nodo Cinco" className={classes.title} id='nav-tab-5' aria-controls='nav-tabpanel-5' />
           </Tabs>
         </AppBar>
         {/* Datos Nodo Promedio
@@ -227,7 +244,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      25.12 °C
+                      {this.state.isData && lastWeather.nodeId0.airTemp} {' °C'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -240,7 +257,7 @@ class Metrics extends Component {
                     disableWidgetMenu
                     title={'Temperatura Aire Vs Tiempo'}
                   >
-                    < DateLines
+                    {/* < DateLines
                       stepLabel={2}
                       yOneLabel={'Humedad %'}
                       dataOne={[33, 32, 36, -41, 85, 65]}
@@ -248,6 +265,14 @@ class Metrics extends Component {
                       dataThree={[85, 45, 91, 85, 90, 45]}
                       dataFour={[10, 65, 19, 47, 90, 29]}
                       dataFive={[3, 52, 36, 14, 90, 25]}
+                    /> */}
+                    <SimpleLines
+                      firstLabel={'Temperatura Aire'}
+                      xLabel={'Tiempo'}
+                      yOneLabel={'°C'}
+                      oneColor={'#4bc0c066'}
+                      borderOneColor={'#4bc0c0'}
+                      stepLabel={2}
                     />
                   </Card>
                 </Grid>
@@ -276,7 +301,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="AirHum" src={GoutAir} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      15.23 %
+                      {this.state.isData && lastWeather.nodeId0.airHum} {' %'}
                     </Typography>
                   </Grid>
 
@@ -289,7 +314,7 @@ class Metrics extends Component {
                     disableWidgetMenu
                     title={'Humedad Aire Vs Tiempo'}
                   >
-                    < DateLines
+                    {/* < DateLines
                       stepLabel={2}
                       yOneLabel={'Humedad %'}
                       dataOne={[33, 32, 36, -41, 85, 65]}
@@ -297,6 +322,14 @@ class Metrics extends Component {
                       dataThree={[85, 45, 91, 85, 90, 45]}
                       dataFour={[10, 65, 19, 47, 90, 29]}
                       dataFive={[3, 52, 36, 14, 90, 25]}
+                    /> */}
+                    <SimpleLines
+                      firstLabel={'Humedad Aire'}
+                      xLabel={'Tiempo'}
+                      yOneLabel={'%'}
+                      oneColor={'#ff638444'}
+                      borderOneColor={'#ff6384'}
+                      stepLabel={2}
                     />
                   </Card>
                 </Grid>
@@ -325,7 +358,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      15.23 °C
+                      {this.state.isData && lastWeather.nodeId0.earthTemp} {' °C'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -337,7 +370,7 @@ class Metrics extends Component {
                     disableWidgetMenu
                     title={'Temperatura Tierra Vs Tiempo'}
                   >
-                    < DateLines
+                    {/* < DateLines
                       stepLabel={2}
                       yOneLabel={'Humedad %'}
                       dataOne={[33, 32, 36, -41, 85, 65]}
@@ -345,6 +378,14 @@ class Metrics extends Component {
                       dataThree={[85, 45, 91, 85, 90, 45]}
                       dataFour={[10, 65, 19, 47, 90, 29]}
                       dataFive={[3, 52, 36, 14, 90, 25]}
+                    /> */}
+                    <SimpleLines
+                      firstLabel={'Temperatura Tierra'}
+                      xLabel={'Tiempo'}
+                      yOneLabel={'°C'}
+                      oneColor={'#ff9f4044'}
+                      borderOneColor={'#ff9f40'}
+                      stepLabel={2}
                     />
                   </Card>
                 </Grid>
@@ -372,7 +413,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      5.23 %
+                      {this.state.isData && lastWeather.nodeId0.earthHum} {' %'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -384,7 +425,7 @@ class Metrics extends Component {
                     disableWidgetMenu
                     title={'Humedad Tierra Vs Tiempo'}
                   >
-                    < DateLines
+                    {/* < DateLines
                       stepLabel={2}
                       yOneLabel={'Humedad %'}
                       dataOne={[33, 32, 36, -41, 85, 65]}
@@ -392,6 +433,14 @@ class Metrics extends Component {
                       dataThree={[85, 45, 91, 85, 90, 45]}
                       dataFour={[10, 65, 19, 47, 90, 29]}
                       dataFive={[3, 52, 36, 14, 90, 25]}
+                    /> */}
+                    <SimpleLines
+                      firstLabel={'Humedad Tierra'}
+                      xLabel={'Tiempo'}
+                      yOneLabel={'%'}
+                      oneColor={'#36a2eb44'}
+                      borderOneColor={'#36a2eb'}
+                      stepLabel={2}
                     />
                   </Card>
                 </Grid>
@@ -419,7 +468,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="Light" src={Sun} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      25.12 Lux
+                      {this.state.isData && lastWeather.nodeId0.light} {' Lux'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -431,7 +480,7 @@ class Metrics extends Component {
                     disableWidgetMenu
                     title={'Luz Vs Tiempo'}
                   >
-                    < DateLines
+                    {/* < DateLines
                       stepLabel={2}
                       yOneLabel={'Humedad %'}
                       dataOne={[33, 32, 36, -41, 85, 65]}
@@ -439,6 +488,14 @@ class Metrics extends Component {
                       dataThree={[85, 45, 91, 85, 90, 45]}
                       dataFour={[10, 65, 19, 47, 90, 29]}
                       dataFive={[3, 52, 36, 14, 90, 25]}
+                    /> */}
+                    <SimpleLines
+                      firstLabel={'Luz'}
+                      xLabel={'Tiempo'}
+                      yOneLabel={'Lux'}
+                      oneColor={'#ffe50044'}
+                      borderOneColor={'#ffe500'}  //#ca8e00 dcc500 d8a200
+                      stepLabel={2}
                     />
                   </Card>
                 </Grid>
@@ -478,8 +535,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId1.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -497,8 +554,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId1.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -529,8 +586,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId1.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -572,8 +629,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId1.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -616,8 +673,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId1.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -635,8 +692,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId1.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -664,8 +721,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId1.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -703,8 +760,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId1.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -729,7 +786,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="Light" src={Sun} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      25.12 Lux
+                      {this.state.isData && lastWeather.nodeId1.light} {' Lux'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -784,8 +841,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId2.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -803,8 +860,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId2.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -835,8 +892,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId2.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -876,8 +933,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId2.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -920,8 +977,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId2.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -939,8 +996,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId2.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -968,8 +1025,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId2.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1007,8 +1064,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId2.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1033,7 +1090,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="Light" src={Sun} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      25.12 Lux
+                      {this.state.isData && lastWeather.nodeId2.light} {' Lux'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -1091,8 +1148,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId3.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1110,8 +1167,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId3.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -1142,8 +1199,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId3.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1183,8 +1240,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId3.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -1227,8 +1284,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId3.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1246,8 +1303,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId3.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1275,8 +1332,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId3.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1314,8 +1371,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId3.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1340,7 +1397,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="Light" src={Sun} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      25.12 Lux
+                      {this.state.isData && lastWeather.nodeId3.light} {' Lux'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -1396,8 +1453,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId4.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1415,8 +1472,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId4.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -1447,8 +1504,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId4.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1488,8 +1545,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId4.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -1532,8 +1589,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId4.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1551,8 +1608,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId4.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1580,8 +1637,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId4.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1619,8 +1676,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId4.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1645,7 +1702,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="Light" src={Sun} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      25.12 Lux
+                      {this.state.isData && lastWeather.nodeId4.light} {' Lux'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -1703,8 +1760,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId5.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1722,8 +1779,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId5.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -1754,8 +1811,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirTemp" src={TemperatureAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        25.12 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId5.airTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1795,8 +1852,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutAir} className={classes.icon} />
                       <Typography component="h1" variant="h6" className={classes.titleCard}>
-                        15.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId5.airHum} {' %'}
+                      </Typography>
                     </Grid>
 
                   </Card>
@@ -1839,8 +1896,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId5.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1858,8 +1915,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId5.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1887,8 +1944,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={TemperatureEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        15.23 °C
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId5.earthTemp} {' °C'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1926,8 +1983,8 @@ class Metrics extends Component {
                       className={classes.containerVar}>
                       <img alt="AirHum" src={GoutEarth} className={classes.icon} />
                       <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                        5.23 %
-                    </Typography>
+                        {this.state.isData && lastWeather.nodeId5.earthHum} {' %'}
+                      </Typography>
                     </Grid>
                   </Card>
                 </Grid>
@@ -1952,7 +2009,7 @@ class Metrics extends Component {
                     className={classes.containerVar}>
                     <img alt="Light" src={Sun} className={classes.icon} />
                     <Typography component="h1" variant={"h6"} className={classes.titleCard}>
-                      25.12 Lux
+                      {this.state.isData && lastWeather.nodeId5.light} {' Lux'}
                     </Typography>
                   </Grid>
                 </Card>
@@ -2015,7 +2072,6 @@ class Metrics extends Component {
     )
   };
 }
-
 
 Metrics.contextType = WeatherContext;
 

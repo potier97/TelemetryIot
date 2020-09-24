@@ -19,8 +19,6 @@ import useStyles from './style.js';
 import { AuthContext } from '../../context/auth'
 
 
-
-
 class Root extends Component {
     render() {
         const { children, classes, width } = this.props;
@@ -71,14 +69,11 @@ class Root extends Component {
     }
 };
 
-
 Root.contextType = AuthContext;
 
 Root.propTypes = {
     classes: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired
 };
-
-
 
 export default withStyles(useStyles)(withWidth()(Root));

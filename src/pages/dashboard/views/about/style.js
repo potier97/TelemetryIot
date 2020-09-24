@@ -20,10 +20,11 @@ const useStyles = (theme) => ({
         paddingBottom: theme.spacing(2),
     },
 
-    greenhouseImg:{ 
+    greenhouse:{ 
         
         // width:'100%',
         // height:'100%'
+        borderRadius: 24
     },
 
     inscriptionKey:{

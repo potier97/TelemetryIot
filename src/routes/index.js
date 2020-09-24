@@ -23,21 +23,21 @@ function Routes() {
     <>
       <SnackbarProvider maxSnack={3}>
         <AuthContexProvider>
-          <WeatherContexProvider>
-            <PlantContexProvider>
+          <PlantContexProvider>
+            <WeatherContexProvider>
               <Root>
-                <Router   >
+                <Router>
                   <Switch>
                     {/* <Route type='private' path="/dashboard" render={(props) => <Dashboard {...props} />} />  */}
-                    <GuardRoute type='private' path="/dashboard" render={(props) => <Dashboard {...props} />} />
+                    <GuardRoute type='private' path="/dashboard"  component={Dashboard} />
                     <GuardRoute type='public' exact path='/login' component={Login} />
                     <GuardRoute type='public' exact path='/' component={Homepage} />
                     <Route type='public' component={NoFound} />
                   </Switch>
                 </Router>
               </Root>
-            </PlantContexProvider>
-          </WeatherContexProvider>
+            </WeatherContexProvider>
+          </PlantContexProvider>
         </AuthContexProvider>
       </SnackbarProvider>
     </>

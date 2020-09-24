@@ -8,30 +8,33 @@ export class PlantContexProvider extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            plants:[],
-            isSetup: false,
+            plants: [],
+            dataReady: false
         }
     };
 
-    componentDidMount() {
-
-        watchUserChnages((user) => {
-            if (user && !this.isSetup) {
-                this.setState({
-                    isSetup: true
-                })
-                watchPlants((plants) => {
-                    this.setState({ plants })
+    async componentDidMount() {
+        this.userWatcherUnsub = watchUserChnages((user) => {
+            if (user && !this.expenseWatcherUnsub) {
+                this.expenseWatcherUnsub = watchPlants((plants) => {
+                    this.setState({ plants, dataReady: true })
                 })
             }
-
         })
     };
 
+
+    componentWillUnmount() {
+        if (this.expenseWatcherUnsub) {
+            this.expenseWatcherUnsub();
+        }
+    }
+
     render() {
+        const { children } = this.props;
         return (
             <PlantsContext.Provider value={this.state}>
-                {this.props.children}
+                {children}
             </PlantsContext.Provider>
         )
     }

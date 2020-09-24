@@ -18,7 +18,6 @@ class GuardRoute extends Component {
         const { type, ...rest } = this.props;
         const { isLoggedIn } = this.context;
 
-
         if (!isLoggedIn && type === 'private') {
             return (
                 <>
@@ -27,14 +26,12 @@ class GuardRoute extends Component {
         } else if (isLoggedIn && type === 'public') {
             return (
                 <>
-                    <Redirect to='/dashboard/metricas' />
+                    <Redirect to='/dashboard/metrics' />
                 </>
             )
         }
-
         return (<>  <Route {...rest} />  </>)
     }
-
 };
 
 

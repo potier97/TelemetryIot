@@ -12,6 +12,7 @@ import Plants  from '../views/plants';
 
  
 function Routes(){ 
+  //console.log('algo')
   return (
     <Switch>
       <RouteWithLayout

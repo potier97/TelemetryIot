@@ -586,10 +586,6 @@ class Plants extends Component {
                 disableWidgetMenu
                 title={'Tabla'}
               >
-                {/* <Tables 
-                  //data={plants}
-                  //
-                /> */}
                 <>
                   <TableContainer className={classes.rootTable}  >
                     <Table className={classes.table}  >
@@ -597,8 +593,8 @@ class Plants extends Component {
                         <TableRow >
                           <TableCell >
                             <Typography component="h1" variant="h6" className={classes.title}>
-                              Alimentos
-                                </Typography>
+                              Planta
+                            </Typography>
                           </TableCell>
                           <TableCell align="right" >
                             <Typography component="h1" variant="body2" className={classes.title}>

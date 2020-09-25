@@ -25,34 +25,34 @@ const maxNumber = (data) => {
     return { max, min }
 };
 
-
-function getHotTempData() {
-    return [
-        //00:00:00 UTC del 1 de enero de 1970.
-        //0=enero and 11=diciembre.
-        //año_num  mes_num  dia_num  hor_num  min_num  seg_num  mils_num
-        { x: new Date(2020, 0, 1, 14, 1, 19, 0), y: Math.random() * 0.5 + 77 },
-        { x: new Date(2020, 0, 1, 14, 1, 20, 0), y: Math.random() * 0.5 + 35 },
-        { x: new Date(2020, 0, 1, 14, 1, 21, 0), y: Math.random() * 0.5 + 45 },
-        { x: new Date(2020, 0, 1, 14, 1, 22, 0), y: Math.random() * 0.5 + 35 },
-        { x: new Date(2020, 0, 1, 14, 1, 23, 0), y: Math.random() * 0.5 + 45 },
-        { x: new Date(2020, 0, 1, 14, 1, 24, 0), y: Math.random() * 0.5 + 35 },
-        { x: new Date(2020, 0, 1, 14, 1, 25, 0), y: Math.random() * 0.5 + 35 },
-        { x: new Date(2020, 0, 1, 14, 1, 26, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 27, 0), y: Math.random() * 0.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 28, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 29, 0), y: Math.random() * 0.5 - 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 30, 0), y: Math.random() * 0.5 + 23.5 },
-    ];
-}
+// // eslint-disable-next-line
+// function getHotTempData() {
+//     return [
+//         //00:00:00 UTC del 1 de enero de 1970.
+//         //0=enero and 11=diciembre.
+//         //año_num  mes_num  dia_num  hor_num  min_num  seg_num  mils_num
+//         { x: new Date(2020, 0, 1, 14, 1, 19, 0), y: Math.random() * 0.5 + 77 },
+//         { x: new Date(2020, 0, 1, 14, 1, 20, 0), y: Math.random() * 0.5 + 35 },
+//         { x: new Date(2020, 0, 1, 14, 1, 21, 0), y: Math.random() * 0.5 + 45 },
+//         { x: new Date(2020, 0, 1, 14, 1, 22, 0), y: Math.random() * 0.5 + 35 },
+//         { x: new Date(2020, 0, 1, 14, 1, 23, 0), y: Math.random() * 0.5 + 45 },
+//         { x: new Date(2020, 0, 1, 14, 1, 24, 0), y: Math.random() * 0.5 + 35 },
+//         { x: new Date(2020, 0, 1, 14, 1, 25, 0), y: Math.random() * 0.5 + 35 },
+//         { x: new Date(2020, 0, 1, 14, 1, 26, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 27, 0), y: Math.random() * 0.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 28, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 29, 0), y: Math.random() * 0.5 - 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 30, 0), y: Math.random() * 0.5 + 23.5 },
+//     ];
+// }
 
  
 
 function SimpleLines(props) {
-    const { stepLabel, firstLabel, xLabel, yOneLabel, oneColor, borderOneColor } = props;
+    const { stepLabel, firstLabel, xLabel, yOneLabel, oneColor, borderOneColor, data } = props;
 
-    const dataA = getHotTempData();
-    let detNumber = maxNumber(dataA)
+    //const dataA = 
+    let detNumber = maxNumber(data)
 
     //console.log(detNumber)
 
@@ -68,7 +68,7 @@ function SimpleLines(props) {
                     datasets: [
                         {
                             label: firstLabel,
-                            data: dataA,
+                            data: data,
                             fill: true, //relleno 
                             lineTension: 0.3,
                             borderWidth: 1.5,

@@ -13,10 +13,8 @@ import Card from '../../../../components/card';
 import Hidden from '@material-ui/core/Hidden';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
-
 //SPINNER
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 
 //IMAGENES
 import TemperatureAir from '../../../../images/temperatureEarth.svg';
@@ -46,9 +44,6 @@ import useStyles from './style.js'
 //GRÁFICO   
 import MuiltiLines from '../../../../components/muiltiLines';
 import SimpleLines from '../../../../components/simpleLines';
-//import DateLines from '../../../../components/dateLines';
-
-
 
 
 //Filtrado de los datos
@@ -59,10 +54,6 @@ import SimpleLines from '../../../../components/simpleLines';
 
 
 class Metrics extends Component {
-
-
-
-
 
   constructor(props) {
     super(props);
@@ -157,7 +148,13 @@ class Metrics extends Component {
 
   render() {
     const { classes, width } = this.props;
-    const { weather, lastWeather, dataReady } = this.context;
+    const { airTempNode0, airHumNode0, earthTempNode0, earthHumNode0, lightNode0,
+            airTempNode1, airHumNode1, earthTempNode1, earthHumNode1, lightNode1,
+            airTempNode2, airHumNode2, earthTempNode2, earthHumNode2, lightNode2,
+            airTempNode3, airHumNode3, earthTempNode3, earthHumNode3, lightNode3,
+            airTempNode4, airHumNode4, earthTempNode4, earthHumNode4, lightNode4,
+            airTempNode5, airHumNode5, earthTempNode5, earthHumNode5, lightNode5,
+            dataReady, lastWeather } = this.context;
     const isDesktop = isWidthUp('md', width);
 
 
@@ -186,7 +183,7 @@ class Metrics extends Component {
       )
     }
 
-    console.log(weather)
+    //console.log(weather)
 
 
     return (
@@ -267,12 +264,13 @@ class Metrics extends Component {
                       dataFive={[3, 52, 36, 14, 90, 25]}
                     /> */}
                     <SimpleLines
-                      firstLabel={'Temperatura Aire'}
+                      firstLabel={'Temperatura Aire Promedio'}
                       xLabel={'Tiempo'}
-                      yOneLabel={'°C'}
+                      yOneLabel={'Temperatura °C'}
                       oneColor={'#4bc0c066'}
                       borderOneColor={'#4bc0c0'}
                       stepLabel={2}
+                      data={airTempNode0}
                     />
                   </Card>
                 </Grid>
@@ -324,12 +322,13 @@ class Metrics extends Component {
                       dataFive={[3, 52, 36, 14, 90, 25]}
                     /> */}
                     <SimpleLines
-                      firstLabel={'Humedad Aire'}
+                      firstLabel={'Humedad Aire Promedio'}
                       xLabel={'Tiempo'}
-                      yOneLabel={'%'}
+                      yOneLabel={'Humedad %'}
                       oneColor={'#ff638444'}
                       borderOneColor={'#ff6384'}
                       stepLabel={2}
+                      data={airHumNode0}
                     />
                   </Card>
                 </Grid>
@@ -380,12 +379,13 @@ class Metrics extends Component {
                       dataFive={[3, 52, 36, 14, 90, 25]}
                     /> */}
                     <SimpleLines
-                      firstLabel={'Temperatura Tierra'}
+                      firstLabel={'Temperatura Tierra Promedio'}
                       xLabel={'Tiempo'}
-                      yOneLabel={'°C'}
+                      yOneLabel={'Temperatura °C'}
                       oneColor={'#ff9f4044'}
                       borderOneColor={'#ff9f40'}
                       stepLabel={2}
+                      data={earthTempNode0}
                     />
                   </Card>
                 </Grid>
@@ -435,12 +435,13 @@ class Metrics extends Component {
                       dataFive={[3, 52, 36, 14, 90, 25]}
                     /> */}
                     <SimpleLines
-                      firstLabel={'Humedad Tierra'}
+                      firstLabel={'Humedad Tierra Promedio'}
                       xLabel={'Tiempo'}
-                      yOneLabel={'%'}
+                      yOneLabel={'Humedad %'}
                       oneColor={'#36a2eb44'}
                       borderOneColor={'#36a2eb'}
                       stepLabel={2}
+                      data={earthHumNode0}
                     />
                   </Card>
                 </Grid>
@@ -490,12 +491,13 @@ class Metrics extends Component {
                       dataFive={[3, 52, 36, 14, 90, 25]}
                     /> */}
                     <SimpleLines
-                      firstLabel={'Luz'}
+                      firstLabel={'Luz Promedio'}
                       xLabel={'Tiempo'}
-                      yOneLabel={'Lux'}
+                      yOneLabel={'Luz - Lux'}
                       oneColor={'#ffe50044'}
                       borderOneColor={'#ffe500'}  //#ca8e00 dcc500 d8a200
                       stepLabel={2}
+                      data={lightNode0}
                     />
                   </Card>
                 </Grid>
@@ -610,6 +612,8 @@ class Metrics extends Component {
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
                       stepLabel={2}
+                      dataA={airTempNode1}
+                      dataB={airHumNode1} 
                     />
                   </Card>
                 </Grid>
@@ -742,6 +746,8 @@ class Metrics extends Component {
                       oneColor={'#ff9f4044'}
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
+                      dataA={earthTempNode1}
+                      dataB={earthHumNode1} 
                     />
                   </Card>
                 </Grid>
@@ -804,6 +810,7 @@ class Metrics extends Component {
                       oneColor={'#ffe50044'}
                       borderOneColor={'#ffe500'}  //#ca8e00 dcc500 d8a200
                       stepLabel={2}
+                      data={lightNode1}
                     />
                   </Card>
                 </Grid>
@@ -913,7 +920,9 @@ class Metrics extends Component {
                       yTwoLabel={'Humedad %'}
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
-                      stepLabel={2}
+                      stepLabel={2}  
+                      dataA={airTempNode2}
+                      dataB={airHumNode2} 
                     />
                   </Card>
                 </Grid>
@@ -1046,6 +1055,8 @@ class Metrics extends Component {
                       oneColor={'#ff9f4044'}
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
+                      dataA={earthTempNode2}
+                      dataB={earthHumNode2}  
                     />
                   </Card>
                 </Grid>
@@ -1108,6 +1119,7 @@ class Metrics extends Component {
                       oneColor={'#ffe50044'}
                       borderOneColor={'#ffe500'}  //#ca8e00 dcc500 d8a200
                       stepLabel={2}
+                      data={lightNode2}
                     />
                   </Card>
                 </Grid>
@@ -1220,7 +1232,9 @@ class Metrics extends Component {
                       yTwoLabel={'Humedad %'}
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
-                      stepLabel={2}
+                      stepLabel={2} 
+                      dataA={airTempNode3}
+                      dataB={airHumNode3} 
                     />
                   </Card>
                 </Grid>
@@ -1353,6 +1367,8 @@ class Metrics extends Component {
                       oneColor={'#ff9f4044'}
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
+                      dataA={earthTempNode3}
+                      dataB={earthHumNode3}  
                     />
                   </Card>
                 </Grid>
@@ -1415,6 +1431,7 @@ class Metrics extends Component {
                       oneColor={'#ffe50044'}
                       borderOneColor={'#ffe500'}  //#ca8e00 dcc500 d8a200
                       stepLabel={2}
+                      data={lightNode3}
                     />
                   </Card>
                 </Grid>
@@ -1525,7 +1542,9 @@ class Metrics extends Component {
                       yTwoLabel={'Humedad %'}
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
-                      stepLabel={2}
+                      stepLabel={2} 
+                      dataA={airTempNode4}
+                      dataB={airHumNode4} 
                     />
                   </Card>
                 </Grid>
@@ -1658,6 +1677,8 @@ class Metrics extends Component {
                       oneColor={'#ff9f4044'}
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
+                      dataA={earthTempNode4}
+                      dataB={earthHumNode4}  
                     />
                   </Card>
                 </Grid>
@@ -1713,15 +1734,14 @@ class Metrics extends Component {
                     disableWidgetMenu
                     title={'Luz Vs Tiempo'}
                   >
-                    <SimpleLines
-
-
+                    <SimpleLines 
                       firstLabel={'Luz Nodo 4'}
                       xLabel={'Tiempo'}
                       yOneLabel={'Lux'}
                       oneColor={'#ffe50044'}
                       borderOneColor={'#ffe500'}  //#ca8e00 dcc500 d8a200
                       stepLabel={2}
+                      data={lightNode4}
                     />
                   </Card>
                 </Grid>
@@ -1832,7 +1852,9 @@ class Metrics extends Component {
                       yTwoLabel={'Humedad %'}
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
-                      stepLabel={2}
+                      stepLabel={2} 
+                      dataA={airTempNode5}
+                      dataB={airHumNode5} 
                     />
                   </Card>
                 </Grid>
@@ -1965,6 +1987,8 @@ class Metrics extends Component {
                       oneColor={'#ff9f4044'}
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
+                      dataA={earthTempNode5}
+                      dataB={earthHumNode5}  
                     />
                   </Card>
                 </Grid>
@@ -2027,6 +2051,7 @@ class Metrics extends Component {
                       oneColor={'#ffe50044'}
                       borderOneColor={'#ffe500'}  //#ca8e00 dcc500 d8a200
                       stepLabel={2}
+                      data={lightNode5}
                     />
                   </Card>
                 </Grid>

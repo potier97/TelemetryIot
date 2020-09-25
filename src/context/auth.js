@@ -15,21 +15,25 @@ export class AuthContexProvider extends Component {
     };
 
     async componentDidMount() {
-        this.userWatcherUnsub = await watchUserChnages((user) => {
-            if (user) {
-                this.setState({
-                    authReady: true,
-                    isLoggedIn: true,
-                    user,
-                })
-            } else {
-                this.setState({
-                    authReady: true,
-                    isLoggedIn: false,
-                    user: null,
-                })
-            }
-        })
+        try {
+            this.userWatcherUnsub = await watchUserChnages((user) => {
+                if (user) {
+                    this.setState({
+                        authReady: true,
+                        isLoggedIn: true,
+                        user,
+                    })
+                } else {
+                    this.setState({
+                        authReady: true,
+                        isLoggedIn: false,
+                        user: null,
+                    })
+                }
+            })
+        } catch (error) {
+            console.log("Error: ", error)
+        }
     };
 
     componentWillUnmount() {

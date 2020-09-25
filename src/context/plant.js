@@ -14,13 +14,17 @@ export class PlantContexProvider extends Component {
     };
 
     async componentDidMount() {
-        this.userWatcherUnsub = watchUserChnages((user) => {
-            if (user && !this.expenseWatcherUnsub) {
-                this.expenseWatcherUnsub = watchPlants((plants) => {
-                    this.setState({ plants, dataReady: true })
-                })
-            }
-        })
+        try {
+            this.userWatcherUnsub = await watchUserChnages((user) => {
+                if (user && !this.expenseWatcherUnsub) {
+                    this.expenseWatcherUnsub = watchPlants((plants) => {
+                        this.setState({ plants, dataReady: true })
+                    })
+                }
+            })
+        } catch (error) {
+            console.log("Error: ", error)
+        }
     };
 
 

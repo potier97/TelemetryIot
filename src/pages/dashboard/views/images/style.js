@@ -1,4 +1,4 @@
-const useStyles = (theme) => ({
+const useStyles = (theme) => ({ 
     root: {
         //height: '100%',
         background: '#e4e4e4',
@@ -18,22 +18,17 @@ const useStyles = (theme) => ({
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
+        //height: 'calc(100% - 200px)'
     },
-
-
-
-    containerTable: {
-        [theme.breakpoints.up('lg')]: {
-            maxHeight: '674px',
-            overflowX: 'auto',
-        },
+    cardContainer: {
+        //backgroundColor: 'red',
+        height: '10%'
+        //height: 'calc(100% - 200px)'
     },
-
-
-
-
-
-    carrousel: {
+    greenhouse: {
+        borderRadius: 7
+    },
+    carrousel:{
         justifyContent: 'center',
         alignItems: 'center',
         display: 'flex',

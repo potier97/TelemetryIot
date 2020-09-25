@@ -9,6 +9,7 @@ import Metrics  from '../views/metrics';
 import About  from '../views/about'; 
 import Recomendation  from '../views/recomendation';
 import Plants  from '../views/plants'; 
+import Images  from '../views/images'; 
 
  
 function Routes(){ 
@@ -31,7 +32,13 @@ function Routes(){
         component={Recomendation}
         exact
         layout={Main}
-        path="/dashboard/recomendation"
+        path="/dashboard/analysis"
+      />
+      <RouteWithLayout
+        component={Images}
+        exact
+        layout={Main}
+        path="/dashboard/images"
       />
       <RouteWithLayout
         component={Plants}

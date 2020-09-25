@@ -44,52 +44,49 @@ const maxNumber = (leftData, rightData) => {
 };
 
 
-function getHotTempData() {
-    return [
-        //00:00:00 UTC del 1 de enero de 1970.
-        //0=enero and 11=diciembre.
-        //año_num  mes_num  dia_num  hor_num  min_num  seg_num  mils_num
-        { x: new Date(2020, 0, 1, 14, 1, 19, 0), y: Math.random() * 0.5 + 77 },
-        { x: new Date(2020, 0, 1, 14, 1, 20, 0), y: Math.random() * 0.5 + 35 },
-        { x: new Date(2020, 0, 1, 14, 1, 21, 0), y: Math.random() * 0.5 + 45 },
-        { x: new Date(2020, 0, 1, 14, 1, 22, 0), y: Math.random() * 0.5 + 35 },
-        { x: new Date(2020, 0, 1, 14, 1, 23, 0), y: Math.random() * 0.5 + 45 },
-        { x: new Date(2020, 0, 1, 14, 1, 24, 0), y: Math.random() * 0.5 + 35 },
-        { x: new Date(2020, 0, 1, 14, 1, 25, 0), y: Math.random() * 0.5 + 35 },
-        { x: new Date(2020, 0, 1, 14, 1, 26, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 27, 0), y: Math.random() * 0.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 28, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 29, 0), y: Math.random() * 0.5 - 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 30, 0), y: Math.random() * 0.5 + 23.5 },
-    ];
-}
+// function getHotTempData() {
+//     return [
+//         //00:00:00 UTC del 1 de enero de 1970.
+//         //0=enero and 11=diciembre.
+//         //año_num  mes_num  dia_num  hor_num  min_num  seg_num  mils_num
+//         { x: new Date(2020, 0, 1, 14, 1, 19, 0), y: Math.random() * 0.5 + 77 },
+//         { x: new Date(2020, 0, 1, 14, 1, 20, 0), y: Math.random() * 0.5 + 35 },
+//         { x: new Date(2020, 0, 1, 14, 1, 21, 0), y: Math.random() * 0.5 + 45 },
+//         { x: new Date(2020, 0, 1, 14, 1, 22, 0), y: Math.random() * 0.5 + 35 },
+//         { x: new Date(2020, 0, 1, 14, 1, 23, 0), y: Math.random() * 0.5 + 45 },
+//         { x: new Date(2020, 0, 1, 14, 1, 24, 0), y: Math.random() * 0.5 + 35 },
+//         { x: new Date(2020, 0, 1, 14, 1, 25, 0), y: Math.random() * 0.5 + 35 },
+//         { x: new Date(2020, 0, 1, 14, 1, 26, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 27, 0), y: Math.random() * 0.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 28, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 29, 0), y: Math.random() * 0.5 - 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 30, 0), y: Math.random() * 0.5 + 23.5 },
+//     ];
+// }
 
-function getColdTempData() {
-    return [
-        { x: new Date(2020, 0, 1, 14, 1, 19, 0), y: Math.random() * 0.5 + 55.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 20, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 21, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 22, 0), y: Math.random() * 0.5 + 0.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 23, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 24, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 25, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 26, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 27, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 28, 0), y: Math.random() * 0.5 + 99.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 29, 0), y: Math.random() * 0.5 + 23.5 },
-        { x: new Date(2020, 0, 1, 14, 1, 30, 0), y: Math.random() * 0.5 + 11.5 }
-    ];
-}
-
-
-
+// function getColdTempData() {
+//     return [
+//         { x: new Date(2020, 0, 1, 14, 1, 19, 0), y: Math.random() * 0.5 + 55.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 20, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 21, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 22, 0), y: Math.random() * 0.5 + 0.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 23, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 24, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 25, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 26, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 27, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 28, 0), y: Math.random() * 0.5 + 99.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 29, 0), y: Math.random() * 0.5 + 23.5 },
+//         { x: new Date(2020, 0, 1, 14, 1, 30, 0), y: Math.random() * 0.5 + 11.5 }
+//     ];
+// }
 
 
 function MultiLines(props) {
-    const { stepLabel, firstLabel, secondLabel, xLabel, yOneLabel, yTwoLabel,  oneColor, twoColor } = props;
+    const { stepLabel, firstLabel, secondLabel, xLabel, yOneLabel, yTwoLabel,  oneColor, twoColor, dataA, dataB } = props;
 
-    const dataA = getHotTempData();
-    const dataB = getColdTempData();
+    // const dataA = getHotTempData();
+    // const dataB = getColdTempData();
     let detNumber = maxNumber(dataA, dataB)
     //console.log(detNumber)
 

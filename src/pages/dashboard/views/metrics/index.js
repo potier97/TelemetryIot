@@ -46,6 +46,8 @@ import MuiltiLines from '../../../../components/muiltiLines';
 import SimpleLines from '../../../../components/simpleLines';
 
 
+
+
 //Filtrado de los datos
 // const dates = ["2018-09-12", "2018-10-18", "2018-12-30"];
 // const filteredDates = dates.filter(d => new Date(d) - new Date() > 0);
@@ -63,8 +65,6 @@ class Metrics extends Component {
 
       //Modal
       stateModalRange: false,
-      //stateModalDelete: false,
-      //stateModalSpinner: false,
 
 
       oneRange: {
@@ -72,7 +72,11 @@ class Metrics extends Component {
         endDate: new Date(),
         key: 'selection',
       },
+      dateA: new Date(),
+      dateB: new Date(),
       changeRange: {},
+      changeRangeTwo: {},
+
       isRange: false,
 
       isData: false,
@@ -83,24 +87,21 @@ class Metrics extends Component {
     this.handleTabs = this.handleTabs.bind(this);
     this.handleModal = this.handleModal.bind(this);
     this.handleRangeAverage = this.handleRangeAverage.bind(this);
-    this.handleCancelRange = this.handleCancelRange.bind(this);
     this.handleSetRange = this.handleSetRange.bind(this);
+    this.handleCancelRange = this.handleCancelRange.bind(this);
+
   };
-
-
 
 
   componentDidMount() {
     this.setState({
       changeRange: this.state.oneRange,
+      changeRangeTwo: this.state.oneRange,
       isData: true,
     })
-    //console.log('ok')
   }
 
-
   handleChange(event) {
-    //console.log(event)
     let data = event.selection
     this.setState({
       oneRange: data
@@ -108,7 +109,7 @@ class Metrics extends Component {
   };
 
 
-  handleTabs(event, newValue) {
+  handleTabs(e, newValue) {
     const value = newValue;
     this.setState({ stateTabs: value });
   };
@@ -119,29 +120,41 @@ class Metrics extends Component {
     });
   };
 
-  handleRangeAverage(e) {
-    // eslint-disable-next-line
-    let data = e;
+  async handleCancelRange() {
+    await this.setState({
+      isRange: false,
+      stateModalRange: false,
+      oneRange: this.state.changeRangeTwo,
+      changeRange: this.state.changeRangeTwo
+    }, () => {
+      console.log(this.state.isRange, 'dealersOverallTotal1');
+    });
 
-    this.handleModal()
-  };
+    await this.setState({
+      isRange: false,
+    });
+  }
 
-  handleCancelRange() {
+  handleRangeAverage() {
     this.setState({
       isRange: false,
-    })
+    });
     this.handleModal()
   };
 
-  handleSetRange() {
-    //let data = {...this.state.oneRange};
-    //console.log('filtrando los datos')
+  async handleSetRange() {
     if (this.state.changeRange.startDate !== this.state.oneRange.startDate && this.state.changeRange.endDate !== this.state.oneRange.endDate) {
-      this.setState({
+
+      console.log('ok')
+      await this.setState({
+        changeRange: this.state.oneRange,
+        isData: true,
         isRange: true,
+      }, () => {
+        console.log(this.state.oneRange, 'dealersOverallTotal1');
       })
-      console.log('filtrando los datos')
-    };
+
+    }
     this.handleModal()
   };
 
@@ -149,41 +162,43 @@ class Metrics extends Component {
   render() {
     const { classes, width } = this.props;
     const { airTempNode0, airHumNode0, earthTempNode0, earthHumNode0, lightNode0,
-            airTempNode1, airHumNode1, earthTempNode1, earthHumNode1, lightNode1,
-            airTempNode2, airHumNode2, earthTempNode2, earthHumNode2, lightNode2,
-            airTempNode3, airHumNode3, earthTempNode3, earthHumNode3, lightNode3,
-            airTempNode4, airHumNode4, earthTempNode4, earthHumNode4, lightNode4,
-            airTempNode5, airHumNode5, earthTempNode5, earthHumNode5, lightNode5,
-            dataReady, lastWeather } = this.context;
+      airTempNode1, airHumNode1, earthTempNode1, earthHumNode1, lightNode1,
+      airTempNode2, airHumNode2, earthTempNode2, earthHumNode2, lightNode2,
+      airTempNode3, airHumNode3, earthTempNode3, earthHumNode3, lightNode3,
+      airTempNode4, airHumNode4, earthTempNode4, earthHumNode4, lightNode4,
+      airTempNode5, airHumNode5, earthTempNode5, earthHumNode5, lightNode5,
+      dataReady, lastWeather } = this.context;
     const isDesktop = isWidthUp('md', width);
 
-
-
+    // //console.log(weather)
+    // const filterData = formatWeather(airTempNode0, airHumNode0, earthTempNode0, earthHumNode0, lightNode0,
+    //   airTempNode1, airHumNode1, earthTempNode1, earthHumNode1, lightNode1,
+    //   airTempNode2, airHumNode2, earthTempNode2, earthHumNode2, lightNode2,
+    //   airTempNode3, airHumNode3, earthTempNode3, earthHumNode3, lightNode3,
+    //   airTempNode4, airHumNode4, earthTempNode4, earthHumNode4, lightNode4,
+    //   airTempNode5, airHumNode5, earthTempNode5, earthHumNode5, lightNode5,
+    //   this.state.isRange, this.state.oneRange.startDate, this.state.oneRange.endDate);
+    // //console.log(filterData)  
 
     if (!dataReady) {
       return (
         <Grid className={classes.subroot}>
           <CssBaseline />
-
           <Grid container
             direction="column"
             justify="center"
             alignItems="center"
             className={classes.subcontainer}>
-
-
             <CircularProgress
               className={classes.dots}
               size={isDesktop ? 250 : 100}
               thickness={isDesktop ? 6 : 4}
             />
-
           </Grid>
         </Grid>
       )
     }
 
-    //console.log(weather)
 
 
     return (
@@ -214,7 +229,9 @@ class Metrics extends Component {
           <BigTitle
             title={'Métricas Promedio'}
             action={this.handleRangeAverage}
-            showAction
+            //showAction
+            //disabledAction={!this.state.isRange}
+            actionClose={this.handleCancelRange}
           />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
@@ -516,7 +533,9 @@ class Metrics extends Component {
           <BigTitle
             title={'Métricas Nodo Uno'}
             action={this.handleRangeAverage}
-            showAction
+            //showAction
+            //disabledAction={!this.state.isRange}
+            //actionClose={this.handleCancelRange}
           />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
@@ -613,7 +632,7 @@ class Metrics extends Component {
                       twoColor={'#ff638444'}
                       stepLabel={2}
                       dataA={airTempNode1}
-                      dataB={airHumNode1} 
+                      dataB={airHumNode1}
                     />
                   </Card>
                 </Grid>
@@ -747,7 +766,7 @@ class Metrics extends Component {
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
                       dataA={earthTempNode1}
-                      dataB={earthHumNode1} 
+                      dataB={earthHumNode1}
                     />
                   </Card>
                 </Grid>
@@ -829,7 +848,9 @@ class Metrics extends Component {
           <BigTitle
             title={'Métricas Nodo Dos'}
             action={this.handleRangeAverage}
-            showAction
+            //showAction
+            //disabledAction={!this.state.isRange}
+            //actionClose={this.handleCancelRange}
           />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
@@ -920,9 +941,9 @@ class Metrics extends Component {
                       yTwoLabel={'Humedad %'}
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
-                      stepLabel={2}  
+                      stepLabel={2}
                       dataA={airTempNode2}
-                      dataB={airHumNode2} 
+                      dataB={airHumNode2}
                     />
                   </Card>
                 </Grid>
@@ -1056,7 +1077,7 @@ class Metrics extends Component {
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
                       dataA={earthTempNode2}
-                      dataB={earthHumNode2}  
+                      dataB={earthHumNode2}
                     />
                   </Card>
                 </Grid>
@@ -1141,7 +1162,9 @@ class Metrics extends Component {
           <BigTitle
             title={'Métricas Nodo Tres'}
             action={this.handleRangeAverage}
-            showAction
+            //showAction
+            //disabledAction={!this.state.isRange}
+            //actionClose={this.handleCancelRange}
           />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
@@ -1232,9 +1255,9 @@ class Metrics extends Component {
                       yTwoLabel={'Humedad %'}
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
-                      stepLabel={2} 
+                      stepLabel={2}
                       dataA={airTempNode3}
-                      dataB={airHumNode3} 
+                      dataB={airHumNode3}
                     />
                   </Card>
                 </Grid>
@@ -1368,7 +1391,7 @@ class Metrics extends Component {
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
                       dataA={earthTempNode3}
-                      dataB={earthHumNode3}  
+                      dataB={earthHumNode3}
                     />
                   </Card>
                 </Grid>
@@ -1451,7 +1474,9 @@ class Metrics extends Component {
           <BigTitle
             title={'Métricas Nodo Cuatro'}
             action={this.handleRangeAverage}
-            showAction
+            //showAction
+            //disabledAction={!this.state.isRange}
+            //actionClose={this.handleCancelRange}
           />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
@@ -1542,9 +1567,9 @@ class Metrics extends Component {
                       yTwoLabel={'Humedad %'}
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
-                      stepLabel={2} 
+                      stepLabel={2}
                       dataA={airTempNode4}
-                      dataB={airHumNode4} 
+                      dataB={airHumNode4}
                     />
                   </Card>
                 </Grid>
@@ -1678,7 +1703,7 @@ class Metrics extends Component {
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
                       dataA={earthTempNode4}
-                      dataB={earthHumNode4}  
+                      dataB={earthHumNode4}
                     />
                   </Card>
                 </Grid>
@@ -1734,7 +1759,7 @@ class Metrics extends Component {
                     disableWidgetMenu
                     title={'Luz Vs Tiempo'}
                   >
-                    <SimpleLines 
+                    <SimpleLines
                       firstLabel={'Luz Nodo 4'}
                       xLabel={'Tiempo'}
                       yOneLabel={'Lux'}
@@ -1761,7 +1786,9 @@ class Metrics extends Component {
           <BigTitle
             title={'Métricas Nodo Cinco'}
             action={this.handleRangeAverage}
-            showAction
+            //showAction
+            //disabledAction={!this.state.isRange}
+            //actionClose={this.handleCancelRange}
           />
           <Container maxWidth={false} className={classes.container}>
             <Grid container spacing={3}>
@@ -1852,9 +1879,9 @@ class Metrics extends Component {
                       yTwoLabel={'Humedad %'}
                       oneColor={'#4bc0c066'}
                       twoColor={'#ff638444'}
-                      stepLabel={2} 
+                      stepLabel={2}
                       dataA={airTempNode5}
-                      dataB={airHumNode5} 
+                      dataB={airHumNode5}
                     />
                   </Card>
                 </Grid>
@@ -1988,7 +2015,7 @@ class Metrics extends Component {
                       twoColor={'#36a2eb44'}
                       stepLabel={2}
                       dataA={earthTempNode5}
-                      dataB={earthHumNode5}  
+                      dataB={earthHumNode5}
                     />
                   </Card>
                 </Grid>
@@ -2073,7 +2100,7 @@ class Metrics extends Component {
         <Modal
           open={this.state.stateModalRange}
           title={'Seleccione Rango'}
-          handleClose={this.handleCancelRange}
+          handleClose={this.handleRangeAverage}
           handleConfirm={this.handleSetRange}
         >
           <Grid item xs={12}  >

@@ -4,13 +4,13 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
+import CloseIcon from '@material-ui/icons/Close';
 // styles
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from "./style";
 
 function BigTitle(props) {
-    const { classes, action, showAction } = props;
+    const { classes, action, showAction, actionClose, disabledAction } = props;
 
     return (
         <>
@@ -34,6 +34,13 @@ function BigTitle(props) {
                         item
                         xs={4}
                         sm={6}  >
+                        <IconButton
+                            aria-label="expand row"
+                            className={classes.iconCancel}
+                            disabled={disabledAction}
+                            onClick={actionClose}>
+                            <CloseIcon />
+                        </IconButton>
                         <IconButton
                             aria-label="expand row"
                             className={classes.icon}

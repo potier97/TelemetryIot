@@ -31,4 +31,18 @@ const useStyles = (theme) => ({
         }, 
     },
 
+
+    iconCancel: {
+        color: '#ffffff',
+        backgroundColor: '#FF220C', 
+        height: theme.spacing(6),
+        width: theme.spacing(6),
+        margin: theme.spacing(1),
+        '&:hover': {
+            color: '#ffffff',
+            backgroundColor: '#FF220C',
+            //margin: theme.spacing(0),
+        }, 
+    },
+
 }); export default useStyles;

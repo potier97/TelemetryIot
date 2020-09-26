@@ -28,6 +28,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 //TREEMAP
 import TreeMap from '../../../../components/treeMap';
+ 
 
 //ESTILOS
 import { withStyles } from '@material-ui/core/styles';
@@ -49,6 +50,7 @@ class Recomendation extends Component {
     super(props);
     this.state = {
       dataReadyGo: false,
+      showDots: true,
       delayTime: 5000,
 
       airTempImages: [],
@@ -61,26 +63,22 @@ class Recomendation extends Component {
   };
 
   componentDidMount() {
-
     this.setState({
       dataReadyGo: true
     })
-    console.log('ok')
+    //console.log('ok')
   }
 
 
-
-
   render() {
-    const { classes, width } = this.props;
-    // eslint-disable-next-line 
-    const { dataReady, heatMaps } = this.context;
+    const { classes, width } = this.props; 
+    const { dataReady, heatMaps, plants } = this.context;
     const isDesktop = isWidthUp('md', width);
     const isDesktopTwo = isWidthUp('lg', width);
 
 
-
-    if (!this.state.dataReadyGo) {
+    //if (!this.state.dataReadyGo) {
+    if (!dataReady) {
       return (
         <Grid className={classes.subroot}>
           <CssBaseline />
@@ -104,9 +102,9 @@ class Recomendation extends Component {
     }
 
 
-    //console.log(weather)
-
-
+    //console.log(heatMaps)
+    //console.log(plants)
+  
     return (
       <Grid className={classes.root}>
         <CssBaseline />
@@ -121,12 +119,7 @@ class Recomendation extends Component {
                 disableWidgetMenu
                 title={'Mapa de Densidad'}
               >
-                <TreeMap data={[
-                  { value: 85, title: 'Alpha' },
-                  { value: 20, title: 'Beta' },
-                  { value: 45, title: 'Teta' },
-                  { value: 9, title: 'Zeta' },
-                  { value: 5, title: 'Gamma' }]} />
+                <TreeMap data={plants} />
               </Card>
             </Grid>
 
@@ -138,7 +131,7 @@ class Recomendation extends Component {
             PRIMERA FILA */}
 
 
-            <Grid item xs={12} lg={4}
+            <Grid item xs={12}
             //className={classes.containerTable}
             >
               <Card
@@ -151,9 +144,35 @@ class Recomendation extends Component {
                   <Table className={classes.table}  >
                     <TableHead>
                       <TableRow >
+                        <TableCell padding={'checkbox'} />
                         <TableCell >
                           <Typography component="h1" variant="h6" className={classes.title}>
                             Planta
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right" >
+                          <Typography component="h1" variant="body2" className={classes.title}>
+                            Temp. Aire
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right" >
+                          <Typography component="h1" variant="body2" className={classes.title}>
+                            Hum. Aire
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right" >
+                          <Typography component="h1" variant="body2" className={classes.title}>
+                            Temp. Tierra
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right" >
+                          <Typography component="h1" variant="body2" className={classes.title}>
+                            Hum. Tierra
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right" >
+                          <Typography component="h1" variant="body2" className={classes.title}>
+                            Luz
                           </Typography>
                         </TableCell>
                         <TableCell align="right" >
@@ -164,51 +183,27 @@ class Recomendation extends Component {
                       </TableRow>
                     </TableHead>
 
-
                     <TableBody>
-                      <StyledTableRow >
+                      {plants.map((plant, index) =>
+                        <StyledTableRow key={index}>
+                          <TableCell component="th" scope="row" className={classes.text}>{parseInt(index)+1}</TableCell>
+                          <TableCell component="th" scope="row" className={classes.text}>{plant.namePlants}</TableCell>
+                          <TableCell align="center" className={classes.text}>{plant.reliabilityAirTemp} {' %'}</TableCell>
+                          <TableCell align="center" className={classes.text}>{plant.reliabilityAirHum} {' %'}</TableCell>
+                          <TableCell align="center" className={classes.text}>{plant.reliabilityEarthTemp} {' %'}</TableCell>
+                          <TableCell align="center" className={classes.text}>{plant.reliabilityEarthHum} {' %'}</TableCell>
+                          <TableCell align="right" className={classes.text}>{plant.reliabilityLight} {' %'}</TableCell>
+                          <TableCell align="center" className={classes.text}>{plant.value} {' %'}</TableCell>
+                        </StyledTableRow>
+                      )}
+
+                      {/* <StyledTableRow >
                         <TableCell component="th" scope="row" className={classes.text}>dffvdv</TableCell>
                         <TableCell align="right" className={classes.text}>fgb {' %'}</TableCell>
-                      </StyledTableRow>
-
-                      <StyledTableRow >
-                        <TableCell component="th" scope="row" className={classes.text}>dffvdv</TableCell>
-                        <TableCell align="right" className={classes.text}>fgb {' %'}</TableCell>
-                      </StyledTableRow>
-
-                      <StyledTableRow >
-                        <TableCell component="th" scope="row" className={classes.text}>dffvdv</TableCell>
-                        <TableCell align="right" className={classes.text}>fgb {' %'}</TableCell>
-                      </StyledTableRow>
-
-                      <StyledTableRow >
-                        <TableCell component="th" scope="row" className={classes.text}>dffvdv</TableCell>
-                        <TableCell align="right" className={classes.text}>fgb {' %'}</TableCell>
-                      </StyledTableRow>
-
-
-                      <StyledTableRow >
-                        <TableCell component="th" scope="row" className={classes.text}>dffvdv</TableCell>
-                        <TableCell align="right" className={classes.text}>fgb {' %'}</TableCell>
-                      </StyledTableRow>
-
-
-                      <StyledTableRow >
-                        <TableCell component="th" scope="row" className={classes.text}>dffvdv</TableCell>
-                        <TableCell align="right" className={classes.text}>fgb {' %'}</TableCell>
-                      </StyledTableRow>
-
-
-
-
+                      </StyledTableRow> */}
                     </TableBody>
                   </Table>
                 </TableContainer>
-
-
-
-
-
               </Card>
             </Grid>
 
@@ -220,7 +215,7 @@ class Recomendation extends Component {
             SEGUNDA FILA */}
 
 
-            <Grid item xs={12} lg={8}>
+            <Grid item xs={12}>
               <Card
                 disableWidgetMenu
                 title={'Mapa de Calor - Temperatura Aire - 24 Horas'}
@@ -235,27 +230,22 @@ class Recomendation extends Component {
                     useKeyboardArrows={false}
                     swipeable={true}
                     emulateTouch={true}
-                    width={'100%'}
-                    showIndicators={false}
+                    width={isDesktopTwo ? '70%' : '100%'}
+                    showIndicators={this.state.showDots}
                     dynamicHeight={true}
                     className={classes.carrousel}
                   >
-                    <div>
-                      <img
-                        src={"https://storage.googleapis.com/telemetryiot.appspot.com/temperaturaAire/Temperatura-Aire-24-09-2020_15-52-09.png"}
-                        alt="Uno"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
-                    <div>
-                      <img
-                        src={'https://storage.googleapis.com/telemetryiot.appspot.com/temperaturaAire/Temperatura-Aire-24-09-2020_15-21-06.png'}
-                        alt="Dos"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
+                    {heatMaps.map((map, index) =>
+                      <div key={index} >
+                        <img
+                          //src={"https://storage.googleapis.com/telemetryiot.appspot.com/temperaturaAire/Temperatura-Aire-24-09-2020_15-52-09.png"}
+                          src={map.airTempImg}
+                          alt={map.airTempImg}
+                          className={classes.greenhouse}
+                          height={isDesktopTwo ? '650px' : null}
+                        />
+                      </div>
+                    )}
                   </Carousel>
                 </Grid>
               </Card>
@@ -283,26 +273,21 @@ class Recomendation extends Component {
                     swipeable={true}
                     emulateTouch={true}
                     width={isDesktopTwo ? '70%' : '100%'}
-                    showIndicators={false}
+                    showIndicators={this.state.showDots}
                     dynamicHeight={true}
                     className={classes.carrousel}
                   >
-                    <div>
-                      <img
-                        src={"https://storage.googleapis.com/telemetryiot.appspot.com/humedadAire/Humedad-Aire-24-09-2020_15-52-09.png"}
-                        alt="Uno"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
-                    <div>
-                      <img
-                        src={'https://storage.googleapis.com/telemetryiot.appspot.com/humedadAire/Humedad-Aire-24-09-2020_15-21-06.png'}
-                        alt="Dos"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
+                    {heatMaps.map((map, index) =>
+                      <div key={index} >
+                        <img
+                          //src={"https://storage.googleapis.com/telemetryiot.appspot.com/humedadAire/Humedad-Aire-24-09-2020_15-52-09.png"} 
+                          src={map.airHumImg}
+                          alt={map.airHumImg}
+                          className={classes.greenhouse}
+                          height={isDesktopTwo ? '650px' : null}
+                        />
+                      </div>
+                    )}
                   </Carousel>
                 </Grid>
               </Card>
@@ -330,26 +315,21 @@ class Recomendation extends Component {
                     swipeable={true}
                     emulateTouch={true}
                     width={isDesktopTwo ? '70%' : '100%'}
-                    showIndicators={false}
+                    showIndicators={this.state.showDots}
                     dynamicHeight={true}
                     className={classes.carrousel}
                   >
-                    <div>
-                      <img
-                        src={"https://storage.googleapis.com/telemetryiot.appspot.com/temperaturaTierra/Temperatura-Tierra-24-09-2020_15-52-09.png"}
-                        alt="Uno"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
-                    <div>
-                      <img
-                        src={'https://storage.googleapis.com/telemetryiot.appspot.com/temperaturaTierra/Temperatura-Tierra-24-09-2020_15-21-06.png'}
-                        alt="Dos"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
+                    {heatMaps.map((map, index) =>
+                      <div key={index} >
+                        <img
+                          //src={"https://storage.googleapis.com/telemetryiot.appspot.com/temperaturaTierra/Temperatura-Tierra-24-09-2020_15-52-09.png"} 
+                          src={map.earthTempImg}
+                          alt={map.earthTempImg}
+                          className={classes.greenhouse}
+                          height={isDesktopTwo ? '650px' : null}
+                        />
+                      </div>
+                    )}
                   </Carousel>
                 </Grid>
               </Card>
@@ -377,26 +357,21 @@ class Recomendation extends Component {
                     swipeable={true}
                     emulateTouch={true}
                     width={isDesktopTwo ? '70%' : '100%'}
-                    showIndicators={false}
+                    showIndicators={this.state.showDots}
                     dynamicHeight={true}
                     className={classes.carrousel}
                   >
-                    <div>
-                      <img
-                        src={"https://storage.googleapis.com/telemetryiot.appspot.com/humedadTierra/Humedad-Tierra-24-09-2020_15-52-09.png"}
-                        alt="Uno"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
-                    <div>
-                      <img
-                        src={'https://storage.googleapis.com/telemetryiot.appspot.com/humedadTierra/Humedad-Tierra-24-09-2020_15-21-06.png'}
-                        alt="Dos"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
+                    {heatMaps.map((map, index) =>
+                      <div key={index} >
+                        <img
+                          //src={"https://storage.googleapis.com/telemetryiot.appspot.com/humedadTierra/Humedad-Tierra-24-09-2020_15-52-09.png"}
+                          src={map.earthHumImg}
+                          alt={map.earthHumImg}
+                          className={classes.greenhouse}
+                          height={isDesktopTwo ? '650px' : null}
+                        />
+                      </div>
+                    )}
                   </Carousel>
                 </Grid>
               </Card>
@@ -425,26 +400,21 @@ class Recomendation extends Component {
                     swipeable={true}
                     emulateTouch={true}
                     width={isDesktopTwo ? '70%' : '100%'}
-                    showIndicators={false}
+                    showIndicators={this.state.showDots}
                     dynamicHeight={true}
                     className={classes.carrousel}
                   >
-                    <div>
-                      <img
-                        src={"https://storage.googleapis.com/telemetryiot.appspot.com/luz/Luz-24-09-2020_15-52-09.png"}
-                        alt="Uno"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
-                    <div>
-                      <img
-                        src={'https://storage.googleapis.com/telemetryiot.appspot.com/luz/Luz-24-09-2020_15-21-06.png'}
-                        alt="Dos"
-                        className={classes.greenhouse}
-                        height={isDesktopTwo ? '650px' : null}
-                      />
-                    </div>
+                    {heatMaps.map((map, index) =>
+                      <div key={index} >
+                        <img
+                          //src={"https://storage.googleapis.com/telemetryiot.appspot.com/luz/Luz-24-09-2020_15-52-09.png"} 
+                          src={map.lightImg}
+                          alt={map.lightImg}
+                          className={classes.greenhouse}
+                          height={isDesktopTwo ? '650px' : null}
+                        />
+                      </div>
+                    )}
                   </Carousel>
                 </Grid>
               </Card>

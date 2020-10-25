@@ -9,9 +9,6 @@ import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js';
  
 
-
-
-
 class Maps extends Component {
     render() {
         const { classes, lng, lat } = this.props;
@@ -47,5 +44,6 @@ class Maps extends Component {
 Maps.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-export default withStyles(useStyles)(GoogleApiWrapper({ apiKey: process.env.REACT_APP_APIKEY_GOOGLEMAPS })(Maps));
-//export default withStyles(useStyles)(GoogleApiWrapper({ apiKey: 'AIzaSyCb8huxzfL_Kt_kdbZP6sEhiL9Bd4OmF9Q' })(Contactzone));
+
+
+export default withStyles(useStyles)(GoogleApiWrapper({ apiKey: process.env.REACT_APP_APIKEY_GOOGLEMAPS })(Maps)); 

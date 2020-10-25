@@ -9,6 +9,7 @@ import { Line } from "react-chartjs-2";
 // styles
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from "./style";
+import "./styles.css"
 
 
 const roundNumber = (x) => {
@@ -151,15 +152,15 @@ function MultiLines(props) {
                                 //unit: 'minute',
                                 tooltipFormat: "dddd, MMMM Do YYYY, H:m:s",
                                 displayFormats: {
-                                    hour: 'MMM D YYYY, H:m:s',
-                                    millisecond: 'MMM D YYYY,  H:m:s',
-                                    second: 'MMM D YYYY, H:m:s',
-                                    minute: 'MMM D YYYY, H:m:s',
-                                    day: 'MMM D YYYY, H:m:s',
-                                    week: 'MMM D YYYY, H:m:s',
-                                    month: 'MMM D YYYY, H:m:s',
-                                    quarter: 'MMM D YYYY, H:m:s',
-                                    year: 'MMM D YYYY, H:m:s',
+                                    hour: 'MMM D YYYY',
+                                    millisecond: 'MMM D YYYY',
+                                    second: 'MMM D YYYY',
+                                    minute: 'MMM D YYYY',
+                                    day: 'MMM D YYYY',
+                                    week: 'MMM D YYYY',
+                                    month: 'MMM D YYYY',
+                                    quarter: 'MMM D YYYY',
+                                    year: 'MMM D YYYY',
                                     // MMM MES: DEC
                                     // D DAY OF MONTH
                                     //YYYY  AÑO

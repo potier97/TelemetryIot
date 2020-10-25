@@ -32,7 +32,7 @@ Los objetivos propuestos son de visión general para el proyecto: Red De Telemet
 La aplicación Web: [Telemetry Iot](https://telemetry-iot.herokuapp.com) se compone de la siguiente estructura:
 
 <h1 align="center">
-  <img src="src/images/PagesTree.jpg"/><br/>
+  <img src="src/images/PagesTreeDoc.jpg"/><br/>
   Estructura Aplicación
 </h1>
 

@@ -12,10 +12,6 @@ import sum from 'lodash/sum';
 
 
 
-
-
-
-
 // async function simpleAverage(collection, carData, vardac, averageVar, isMax) {
 //     let collectionFilter = null;
 //     if (isMax) {

@@ -7,9 +7,7 @@ import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { withStyles } from '@material-ui/core/styles';
 import useStyles from './style.js'
 
- 
-
-
+  
 class Main extends Component {
 
   constructor(props) {

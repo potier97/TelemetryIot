@@ -692,16 +692,7 @@ class Plants extends Component {
 
           </Modal>
 
-
-          {/* Modal
-           Modal
-           Modal
-           Modal
-           Modal
-           Modal
-           Modal
-           Modal
-           Modal
+          {/* Modal 
            Modal
            Modal */}
 
